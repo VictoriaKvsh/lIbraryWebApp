@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReportingService {
-
+public class ReportingServiceBook {
+	
 	@Autowired
-	private OldUserService jdbcUserService;
+	private BookDiscriptionService jdbcUserService;
 
-	public Integer getAllUsersCount() {
-		return jdbcUserService.getUsers().size();
+	public Integer getAllBooksCount() {
+		return jdbcUserService.getBooks().size();
 	}
 
 }

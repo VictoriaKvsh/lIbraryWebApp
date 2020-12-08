@@ -6,19 +6,23 @@
 	<artifactId>librarywebapp</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>librarywebapp Maven Webapp</name>
+	<name>webappsample Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<hiber.version>5.4.23.Final</hiber.version>
 		<hiber-validator.version>6.1.6.Final</hiber-validator.version>
 	</properties>
+
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.5.RELEASE</version>
 	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -27,6 +31,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -104,4 +112,5 @@
 			<version>2.9.2</version>
 		</dependency>
 	</dependencies>
+
 </project>

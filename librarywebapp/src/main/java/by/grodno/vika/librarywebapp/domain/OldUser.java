@@ -31,6 +31,6 @@ public class OldUser {
 	private Date birthdate;
 
 	@Column(name = "isMale")
-	private boolean male;
+	private Boolean male;
 
 }
