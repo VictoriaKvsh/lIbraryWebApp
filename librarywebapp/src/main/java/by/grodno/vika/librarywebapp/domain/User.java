@@ -51,14 +51,14 @@ public class User {
 	 * @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ownerUser") 
 	 * private List<Credentials> credentials;
 	 * 
-	 * @OneToMany(mappedBy = "student") 
-	 * private List<ReadersBook> readersBook;
-	 * 
-	 * @OneToOne(cascade = CascadeType.ALL)
-	 * @JoinColumn(name="subscription_id") 
-	 * private Subscription subscription;
-	 * 
-	 */
+	@OneToMany(mappedBy = "student") 
+	 private List<ReadersBook> readersBook;
+	*/
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="subscription_id") 
+	private Subscription subscription;
+	 
+	 
 	@Override
 	public String toString() {
 		return "User: [" + firstName + ", " + lastName + "]";

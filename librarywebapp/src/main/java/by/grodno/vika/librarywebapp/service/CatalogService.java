@@ -8,6 +8,9 @@ public interface CatalogService {
 
 	
 	List<Catalog> getCatalog();
+	
+	Catalog addCatalog(Integer discriptionId, Catalog catalog);
+
 
 	
 }

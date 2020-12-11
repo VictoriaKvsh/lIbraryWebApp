@@ -29,7 +29,7 @@ public class Catalog {
 	@Column(nullable = false)
 	private Status status;
 
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "bookDiscription_id")
 	private BookDiscription bookDiscription;
 

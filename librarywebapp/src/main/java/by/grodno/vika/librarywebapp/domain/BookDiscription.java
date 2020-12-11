@@ -39,8 +39,8 @@ public class BookDiscription {
 	
 	private Integer year;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bookDiscription")
-	private List<Catalog> catalog;
+	//@OneToMany(cascade = CascadeType.MERGE, mappedBy = "bookDiscription")
+	//private List<Catalog> catalog;
 	
 	
 	

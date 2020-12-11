@@ -3,6 +3,8 @@ package by.grodno.vika.librarywebapp.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,8 +26,8 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 	}
 
 	@Override
-	public void addBook(List<BookDiscription> book) {
-		repo.saveAll(book);
+	public void addBook(BookDiscription book) {
+		repo.save(book);
 
 	}
 
@@ -38,6 +40,14 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 	@Override
 	public Page<BookDiscription> getPage(Integer pageNum, Integer pageSize) {
 		return repo.findAll(PageRequest.of(pageNum, pageSize, Sort.Direction.ASC, "autor"));
+	}
+	
+	
+	@Override
+	public List<BookDiscription> findByExample(BookDiscription autor) {
+		Example<BookDiscription> exp = Example.of(autor,
+				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
+		return repo.findAll(exp);
 	}
 
 }

@@ -22,7 +22,7 @@ public class UsersController {
 	private UserService repo;
 
 	@PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void saveUser(@RequestBody List<User> user) {
+	public void saveUser(@RequestBody User user) {
 		repo.addUser(user);
 	}
 
@@ -33,8 +33,8 @@ public class UsersController {
 
 	@GetMapping("/users/filter")
 	public List<User> findByExample(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("role") Role role, @RequestParam("email") String email, @RequestParam("login") String login) {
-		User User = new User(null, firstName, lastName, email, login, role);
+			@RequestParam("lastName") String lastName, @RequestParam("role") Role role, @RequestParam("login") String login) {
+		User User = new User(null, firstName, lastName, null, login, role, null);
 		return repo.findByExample(User);
 	}
 

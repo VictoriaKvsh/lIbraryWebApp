@@ -23,9 +23,9 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	public void addUser(List<User> users) {
-		repo.saveAll(users);
-
+	public void addUser(User user) {
+		repo.save(user);
+	
 	}
 
 	@Override

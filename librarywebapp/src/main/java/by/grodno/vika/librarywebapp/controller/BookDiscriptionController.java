@@ -21,8 +21,8 @@ public class BookDiscriptionController {
 	
 	
 	@PostMapping(path = "/books", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void saveBook(@RequestBody List<BookDiscription> book) {
-		repo.addBook(book);;
+	public void saveBook(@RequestBody BookDiscription book) {
+		repo.addBook(book);
 	}
 
 	@GetMapping("/books")
@@ -34,4 +34,11 @@ public class BookDiscriptionController {
 	public List<BookDiscription> getUsersPage(@RequestParam("pnum") Integer pnum, @RequestParam("psize") Integer psize) {
 		return repo.getPage(pnum, psize).getContent();
 }
+	
+	@GetMapping("/books/filter")
+	public List<BookDiscription> findByExample(@RequestParam(value = "autor", required = false) String autor,
+			@RequestParam(value = "name", required = false) String name, @RequestParam(value = "genre", required = false) String genre) {
+		BookDiscription bookDiscription = new BookDiscription(null, autor, name, genre, null);
+		return repo.findByExample(bookDiscription);
+	}
 }

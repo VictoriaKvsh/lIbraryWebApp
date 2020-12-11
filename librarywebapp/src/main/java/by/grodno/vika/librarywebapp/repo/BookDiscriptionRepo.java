@@ -9,4 +9,6 @@ import by.grodno.vika.librarywebapp.domain.BookDiscription;
 public interface BookDiscriptionRepo extends JpaRepository<BookDiscription, Integer>{ // Int - primary key type
 
 	List<BookDiscription> findByAutor(String autor);
+	
+	Integer findbyId (Integer numb);
 }
