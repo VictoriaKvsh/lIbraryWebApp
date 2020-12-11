@@ -2,7 +2,6 @@ package by.grodno.vika.librarywebapp.service;
 
 import java.util.List;
 
-import javax.management.relation.RelationNotFoundException;
 
 import by.grodno.vika.librarywebapp.domain.Catalog;
 

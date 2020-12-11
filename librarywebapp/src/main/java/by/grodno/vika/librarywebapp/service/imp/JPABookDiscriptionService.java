@@ -50,10 +50,6 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 		return repo.findAll(exp);
 	}
 
-	@Override
-	public Integer findById(Integer discriptionId) {
-		
-		return repo.findbyId(discriptionId);
-	}
+
 
 }

@@ -18,6 +18,5 @@ public interface BookDiscriptionService {
 
 	List<BookDiscription> findByExample(BookDiscription autor);
 
-	Integer findById(Integer discriptionId);
 
 }

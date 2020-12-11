@@ -10,5 +10,6 @@ public interface BookDiscriptionRepo extends JpaRepository<BookDiscription, Inte
 
 	List<BookDiscription> findByAutor(String autor);
 	
-	Integer findbyId (Integer numb);
+	
+	
 }
