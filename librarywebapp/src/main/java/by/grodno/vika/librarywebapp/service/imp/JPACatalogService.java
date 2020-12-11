@@ -24,7 +24,7 @@ public class JPACatalogService implements CatalogService {
 		return catalogRepo.findAll();
 	}
 
-	@Override
+/*	@Override
 	public Catalog addCatalog(Integer discriptionId, Catalog catalog) {
 		
 		return bookRepo.findById(discriptionId).map(bookDiscription -> {
@@ -32,7 +32,7 @@ public class JPACatalogService implements CatalogService {
             return catalogRepo.save(catalog);
         }).orElseThrow(() -> new ResourceNotFoundException("Discription Id " + discriptionId + " not found"));
     }
-	
+	*/
 	
 
 }
