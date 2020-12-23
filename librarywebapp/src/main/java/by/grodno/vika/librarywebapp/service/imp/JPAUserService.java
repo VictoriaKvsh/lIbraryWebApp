@@ -64,11 +64,7 @@ public class JPAUserService implements UserService {
 		return repo.findByLastName(lastName);
 	}
 
-	@Override
-	public Optional<User> findByUsername(String username) {
-
-		return repo.findByUsername(username);
-	}
+	
 
 	@Override
 	public User getUser(Integer id) {
@@ -85,9 +81,9 @@ public class JPAUserService implements UserService {
 		Optional<User> findById = repo.findById(id);
 
 		findById.map(user -> {
-			UserCredentials cred = user.getCredentials();
-			cred.setActive(true);
-			credRepo.save(cred);
+			UserCredentials next = user.getCredentials().iterator().next();
+			next.setActive(true);
+			credRepo.save(next);
 			return user;
 		}).orElseThrow(() -> new UserNotFoundException());
 

@@ -1,5 +1,6 @@
 package by.grodno.vika.librarywebapp.converter;
 
+import java.util.Collections;
 import java.util.Date;
 
 import org.springframework.core.convert.converter.Converter;
@@ -22,9 +23,9 @@ public class UserRegistrationDTOToUserConverter implements Converter<UserRegistr
 		user.setLastName(source.getLastName());
 		user.setEmail(source.getEmail());
 		user.setRole(UserRole.READER);
-		UserCredentials creds = new UserCredentials(null,  new Date(), false, source.getPassword(), null);
+		UserCredentials creds = new UserCredentials(null,  new Date(), false, source.getPassword());
 
-		user.setCredentials(creds);
+		user.setCredentials(Collections.singletonList(creds));
 		return user;
 	}
 

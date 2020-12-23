@@ -25,7 +25,6 @@ public interface UserService {
 
 	List<User> findByLName(String lastName);
 	
-	Optional <User> findByUsername (String username);
 
 	
 

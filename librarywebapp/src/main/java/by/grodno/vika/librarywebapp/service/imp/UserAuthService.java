@@ -34,6 +34,7 @@ public class UserAuthService implements UserDetailsService {
 
 			return new User(userFromBd.getEmail(), password, toAuthorities(userFromBd));
 		}).orElse(null);
+		
 	}
 
 	private Collection<? extends GrantedAuthority> toAuthorities(
