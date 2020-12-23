@@ -11,6 +11,10 @@ public interface CatalogService {
 	List<Catalog> getCatalog();
 	
 	Catalog addCatalog(Integer discriptionId, Catalog catalog);
+	
+	Catalog updateCatalog(Integer catalogId, Catalog catalogRequest);
+
+	void deleteCatalog(Integer number);
 
 
 	

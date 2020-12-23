@@ -1,7 +1,5 @@
 package by.grodno.vika.librarywebapp.controller;
 
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import by.grodno.vika.librarywebapp.domain.BookDiscription;
+import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
 import by.grodno.vika.librarywebapp.repo.BookDiscriptionRepo;
 import by.grodno.vika.librarywebapp.service.BookDiscriptionService;
 
@@ -32,6 +33,17 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 	}
 
 	@Override
+	public BookDiscription updateBook(Integer number, BookDiscription bookRequest) {
+		return repo.findById(number).map(bookDiscription -> {
+			bookDiscription.setAutor(bookRequest.getAutor());
+			bookDiscription.setTitle(bookRequest.getTitle());
+			bookDiscription.setGenre(bookRequest.getGenre());
+			bookDiscription.setYear(bookRequest.getYear());
+			return repo.save(bookDiscription);
+		}).orElseThrow(() -> new ResourceNotFoundException("BookId " + number + " not found"));
+	}
+
+	@Override
 	public void deleteBook(Integer number) {
 		repo.deleteById(number);
 
@@ -41,15 +53,12 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 	public Page<BookDiscription> getPage(Integer pageNum, Integer pageSize) {
 		return repo.findAll(PageRequest.of(pageNum, pageSize, Sort.Direction.ASC, "autor"));
 	}
-	
-	
+
 	@Override
 	public List<BookDiscription> findByExample(BookDiscription autor) {
 		Example<BookDiscription> exp = Example.of(autor,
 				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
 		return repo.findAll(exp);
 	}
-
-
 
 }

@@ -11,6 +11,8 @@ public interface BookDiscriptionService {
 	List<BookDiscription> getBooks();
 
 	void addBook(BookDiscription book);
+	
+	BookDiscription updateBook (Integer number, BookDiscription book);
 
 	void deleteBook(Integer number);
 	

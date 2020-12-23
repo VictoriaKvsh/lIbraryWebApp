@@ -28,14 +28,14 @@ public class ReadersBook {
 	private Integer id;
 
 	@Temporal(TemporalType.DATE)
-	private Date year;
+	private Date date;
 
 	@ManyToOne
 	@JoinColumn(name = "reader_id")
-	private User student;
+	private Subscription subscription;
 
 	
-	@OneToOne
+	@OneToOne   
 	@JoinColumn(name = "catalog")
 	private Catalog catalog;
 	

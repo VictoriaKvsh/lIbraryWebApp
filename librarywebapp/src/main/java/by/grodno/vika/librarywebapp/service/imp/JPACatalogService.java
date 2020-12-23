@@ -33,7 +33,22 @@ public class JPACatalogService implements CatalogService {
             return catalogRepo.save(catalog);
         }).orElseThrow(() -> new ResourceNotFoundException("Discription Id " + discriptionId + " not found"));
     }
+
+	@Override
+	public Catalog updateCatalog(Integer catalogId, Catalog catalogRequest) {
+		return catalogRepo.findById(catalogId).map(catalog -> {
+        	catalog.setStatus(catalogRequest.getStatus());
+        	catalog.setBookDiscription(catalogRequest.getBookDiscription());
+        	
+            return catalogRepo.save(catalog);
+        }).orElseThrow(() -> new ResourceNotFoundException("Catalog Id " + catalogId + " not found"));
+    }
 	
+	@Override
+	public void deleteCatalog(Integer number) {
+		catalogRepo.deleteById(number);
+
+	}
 	
 
 }
