@@ -1,0 +1,9 @@
+.metadata/
+Servers/
+librarywebapp/.settings/org.eclipse.m2e.core.prefs
+librarywebapp/.settings/
+librarywebapp/target/
+
+librarywebapp/.classpath
+librarywebapp/.project
+librarywebapp/2773e035-6103-4c7c-b4b1-9ee8d2fe122e
