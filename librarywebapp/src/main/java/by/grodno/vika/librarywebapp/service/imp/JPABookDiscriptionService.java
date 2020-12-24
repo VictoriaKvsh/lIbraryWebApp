@@ -37,7 +37,6 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 		return repo.findById(number).map(bookDiscription -> {
 			bookDiscription.setAutor(bookRequest.getAutor());
 			bookDiscription.setTitle(bookRequest.getTitle());
-			bookDiscription.setGenre(bookRequest.getGenre());
 			bookDiscription.setYear(bookRequest.getYear());
 			return repo.save(bookDiscription);
 		}).orElseThrow(() -> new ResourceNotFoundException("BookId " + number + " not found"));

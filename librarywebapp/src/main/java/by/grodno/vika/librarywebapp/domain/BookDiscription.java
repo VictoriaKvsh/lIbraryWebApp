@@ -30,10 +30,7 @@ public class BookDiscription {
 	
 	@Column(nullable = false)
 	private String title;
-	
-	@Column(nullable = false)
-	private String genre;
-	
+		
 	private Integer year;
 	
 	@OneToMany(mappedBy = "bookDiscription")

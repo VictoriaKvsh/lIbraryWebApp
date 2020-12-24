@@ -31,7 +31,7 @@ public class CatalogController {
 		 return "catalogList";
 	}
 	
-	@PostMapping(path = "/catalog/{bookId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/catalog/{bookId}/new")
 	public Catalog saveCatalog(@PathVariable (value = "bookId") Integer discriptionId, @RequestBody Catalog catalog) {
 		return repo.addCatalog(discriptionId, catalog);
 	}
