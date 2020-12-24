@@ -1,15 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="UTF-8">
-<title>Welcome to the application!!!</title>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
+<th:block th:insert="fragments/header.html :: css" /> 
+
 <body>
-	<h1>Welcome to the Spring MVC application</h1>
-	<form action="/findByName/{lname}" method="get">
-		<input name="lname" placeholder="Please, paste last name here"
-			type="text"> <input type="submit"
-			value="Navigate to the home page">
-	</form>
+
+    <th:block th:insert="fragments/navBar.html :: navBar" /> 
+
+	<p>
+		Hello. Choose something in menu please!
+	</p>
+
+
+	<br />
+	<br />
+
+
+	<th:block th:insert="fragments/scripts.html :: js" /> 
+
 </body>
-</html>
+</html> 

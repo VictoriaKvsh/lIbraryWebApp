@@ -50,9 +50,6 @@ public class User {
 	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
 	private UserPicture picture;
 	
-	@OneToOne
-	private UserDetails details;
-	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 			joinColumns = @JoinColumn(name = "u1"), 
@@ -62,7 +59,7 @@ public class User {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerUser")
 	private Subscription subscription;
 
-	private String avatarFileName;
+	
 	
 	@Override
 	public String toString() {

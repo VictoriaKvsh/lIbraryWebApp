@@ -67,13 +67,7 @@ public class UsersController {
 		userService.deleteUser(userId);
 	}
 
-	@GetMapping("/users/filter")
-	public List<User> findByExample(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("role") UserRole role,
-			@RequestParam("email") String email) {
-		User User = new User(null, firstName, lastName, email, null, null, null, null, null, null);
-		return userService.findByExample(User);
-	}
+
 
 	@GetMapping("/users/findByName/{lname}")
 	public List<User> getUserByLName(@PathVariable("lname") String lname) {

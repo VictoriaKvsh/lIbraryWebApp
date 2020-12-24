@@ -34,7 +34,7 @@ public class BookDiscriptionController {
 	public String getAllBooks(Model model) {
 		List<BookDiscription> discr = repo.getBooks();
 		model.addAttribute("discr", discr);
-		return "logindemo";
+		return "catalogList";
 	}
 
 	@PutMapping("/books/{bookId}")

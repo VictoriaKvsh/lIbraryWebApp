@@ -34,9 +34,10 @@ public class UserAuthService implements UserDetailsService {
 
 			return new User(userFromBd.getEmail(), password, toAuthorities(userFromBd));
 		}).orElse(null);
-		
 	}
 
+	
+	
 	private Collection<? extends GrantedAuthority> toAuthorities(
 			by.grodno.vika.librarywebapp.domain.User findByUserName) {
 		return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + findByUserName.getRole().name()));

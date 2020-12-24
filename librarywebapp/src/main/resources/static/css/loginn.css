@@ -4,7 +4,7 @@ body{
   font-family: 'Mukta', sans-serif;
 	height:100vh;
 	min-height:550px;
-	background-image: url(http://www.planwallpaper.com/static/images/Free-Wallpaper-Nature-Scenes.jpg);
+	background-image: url(https://wallpapercave.com/wp/wp5032078.jpg);
 	background-repeat: no-repeat;
 	background-size:cover;
 	background-position:center;
@@ -114,7 +114,7 @@ a{
     padding:10px 0;
 }
 
-.register-show input[type="text"], .register-show input[type="password"]{
+.register-show input[type="text"], .register-show input[type="password"], .register-show input[type="firstname"], .register-show input[type="lastname"]{
     width: 100%;
     display: block;
     margin:20px 0;
@@ -152,6 +152,3 @@ a{
   text-decoration:none;
   color:#2c7715;
 }
-    
-    
-    
