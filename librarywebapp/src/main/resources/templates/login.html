@@ -16,6 +16,7 @@
 </head>
 <body>
 <script th:src="@{/js/loggin.js}" defer></script>
+
 <div class="login-reg-panel">
 		<div class="login-info-box">
 			<h2>Have an account?</h2>
@@ -28,24 +29,35 @@
 			<label id="label-login" for="log-login-show">Register</label>
 			<input type="radio" name="active-log-panel" id="log-login-show">
 		</div>
+	
 							
 		<div class="white-panel">
+		
+
+	
+	<form th:action="@{/login}" method="post">
+			
 			<div class="login-show">
 				<h2>LOGIN</h2>
-				<input type="text" placeholder="Email">
-				<input type="password" placeholder="Password">
-				<input type="button" value="Login">
+				<input type="text" name="username" placeholder="Email">
+				<input type="password" name="password" placeholder="Password">
+				<input type="submit" value="Login">
 				<a href="">Forgot password?</a>
+				
+					
 			</div>
+			<div th:if="${param.error}"><div class="alert alert-dark" role="alert">Invalid email and/or password</div></div>
+	</form>
 			<div class="register-show">
 				<h2>REGISTER</h2>
 				<input type="text" placeholder="Email">
 				<input type="password" placeholder="Password">
-				<input type="firstname" placeholder="firstname">
-				<input type="lastname" placeholder=" lastname">
-				<input type="button" value="Register">
+				<input type="firstname" placeholder="First name">
+				<input type="lastname" placeholder=" Last name">
+				<input type="submit" value="Register">
 			</div>
 		</div>
+	
 	</div>
    
 </body>
