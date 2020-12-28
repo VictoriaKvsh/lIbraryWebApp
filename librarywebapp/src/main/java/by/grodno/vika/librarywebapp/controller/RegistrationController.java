@@ -33,8 +33,6 @@ public class RegistrationController {
 	String registerPage(UserRegistrationDTO newUserDTO) {
 
 		service.saveUser(convertionService.convert(newUserDTO, User.class));
-
 		return "redirect:/login";
 	}
-
 }

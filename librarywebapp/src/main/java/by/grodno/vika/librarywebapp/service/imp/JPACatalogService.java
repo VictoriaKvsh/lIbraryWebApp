@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.grodno.vika.librarywebapp.domain.Catalog;
+import by.grodno.vika.librarywebapp.domain.Status;
 import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
 import by.grodno.vika.librarywebapp.repo.BookDiscriptionRepo;
 import by.grodno.vika.librarywebapp.repo.CatalogRepo;
@@ -30,6 +31,7 @@ public class JPACatalogService implements CatalogService {
 		
 		return bookRepo.findById(discriptionId).map(bookDiscription -> {
 			catalog.setBookDiscription(bookDiscription);
+			catalog.setStatus(Status.AVAILABLE);
             return catalogRepo.save(catalog);
         }).orElseThrow(() -> new ResourceNotFoundException("Discription Id " + discriptionId + " not found"));
     }

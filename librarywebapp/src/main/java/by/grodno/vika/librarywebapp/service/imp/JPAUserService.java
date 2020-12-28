@@ -35,6 +35,7 @@ public class JPAUserService implements UserService {
 	@Override
 	public void saveUser(User user) {
 		repo.save(user);
+		emailService.sendUserActivationEmail(user);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import by.grodno.vika.librarywebapp.domain.BookDiscription;
 import by.grodno.vika.librarywebapp.domain.Catalog;
 import by.grodno.vika.librarywebapp.service.CatalogService;
 
@@ -28,12 +29,14 @@ public class CatalogController {
 	public String getCatalog(Model model) {
 		 List<Catalog> catalog = repo.getCatalog();
 		 model.addAttribute("catalog", catalog);
-		 return "catalogList";
+		 return "catalog";
 	}
 	
-	@PostMapping(path = "/catalog/{bookId}/new")
-	public Catalog saveCatalog(@PathVariable (value = "bookId") Integer discriptionId, @RequestBody Catalog catalog) {
-		return repo.addCatalog(discriptionId, catalog);
+	@PostMapping(path = "/books/{bookId}/catalog")
+	public String saveCatalog(@PathVariable ("bookId") Integer discriptionId, Catalog catalog) {
+		repo.addCatalog(discriptionId, catalog);
+		
+		return "redirect:/books";
 	}
 	
 	

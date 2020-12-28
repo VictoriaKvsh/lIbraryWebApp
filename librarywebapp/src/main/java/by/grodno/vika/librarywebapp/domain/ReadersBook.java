@@ -1,6 +1,8 @@
 package by.grodno.vika.librarywebapp.domain;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,13 +33,14 @@ public class ReadersBook {
 	private Date date;
 
 	@ManyToOne
-	@JoinColumn(name = "reader_id")
-	private Subscription subscription;
+	@JoinColumn(name = "user_id")
+	private User ownerUser;
 
-	
 	@OneToOne   
 	@JoinColumn(name = "catalog")
 	private Catalog catalog;
+	
+	
 	
 
 	

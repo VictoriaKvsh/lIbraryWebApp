@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import by.grodno.vika.librarywebapp.domain.UserRole;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.Avatar;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
@@ -42,11 +41,6 @@ public class UsersController {
 	private StorageService imgService;
 	@Autowired
 	private ConversionService convertionService;
-
-	@PostMapping(path = "/users/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void saveUser(@RequestBody User user) {
-		userService.saveUser(user);
-	}
 
 	@GetMapping("/users")
 	public String getAllUsers(Model model) {
@@ -66,8 +60,6 @@ public class UsersController {
 	public void deleteUser(@PathVariable Integer userId) {
 		userService.deleteUser(userId);
 	}
-
-
 
 	@GetMapping("/users/findByName/{lname}")
 	public List<User> getUserByLName(@PathVariable("lname") String lname) {
@@ -91,7 +83,7 @@ public class UsersController {
 			}
 		}
 	}
-	
+
 	@GetMapping("/apis/v1/users")
 	@ResponseBody
 	public List<UserDTO> getAllUsers() {

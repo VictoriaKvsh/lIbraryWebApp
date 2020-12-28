@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Books discriptions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<body>
+
+
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Autor</th>
+				<th scope="col">Title</th>
+				<th scope="col">Year</th>
+				<th scope="col">Status</th>
+				<th scope="col">Order</th>
+
+
+			</tr>
+		</thead>
+
+		<tr th:each="catalog : ${catalog}">
+			<td th:text="${catalog.bookDiscription.autor}" />
+			<td th:text="${catalog.bookDiscription.title}" />
+			<td th:text="${catalog.bookDiscription.year}" />
+			<td th:text="${catalog.status}" />
+
+			<td sec:authorize="hasRole('ROLE_ADMIN')">This content is only
+				shown to administrators.
+			<td th:text="${catalog.id}" />
+
+
+		
+		</tr>
+	</table>
+
+	<br />
+	<br />
+
+	<form th:action="@{/books}" method="get">
+		<input type="submit" value="Books discriptions" />
+	</form>
+
+
+</body>
+</html>

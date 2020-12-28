@@ -34,13 +34,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@NotEmpty(message = "Name should not be empty")
+	//@NotEmpty(message = "Name should not be empty")
 	private String firstName;
 
-	@NotEmpty(message = "Last name should not be empty")
+	//@NotEmpty(message = "Last name should not be empty")
 	private String lastName;
 
-	@Email(message = "Email should be valid")
+//	@Email(message = "Email should be valid")
 	@Column(nullable = false, unique = true)
 	private String email;
 
@@ -56,8 +56,8 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "u2"))
 	private List<UserCredentials> credentials;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerUser")
-	private Subscription subscription;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerUser")
+	private List<ReadersBook> readersBook;
 
 	
 	

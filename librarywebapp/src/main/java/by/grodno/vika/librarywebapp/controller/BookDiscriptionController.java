@@ -59,8 +59,7 @@ public class BookDiscriptionController {
 
 	@GetMapping("/books/search")
 	public List<BookDiscription> findByExample(@RequestParam(value = "autor", required = false) String autor,
-			@RequestParam(value = "title", required = false) String title,
-			@RequestParam(value = "genre", required = false) String genre) {
+			@RequestParam(value = "title", required = false) String title) {
 		BookDiscription bookDiscription = new BookDiscription(null, autor, title, null, null);
 		return repo.findByExample(bookDiscription);
 	}

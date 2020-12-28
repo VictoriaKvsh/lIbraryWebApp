@@ -26,9 +26,10 @@ public class Catalog {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	
 	@Column(nullable = false)
 	private Status status;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "bookDiscription_id")
 	private BookDiscription bookDiscription;

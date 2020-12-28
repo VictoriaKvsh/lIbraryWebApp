@@ -20,8 +20,6 @@ import by.grodno.vika.librarywebapp.config.EmailProperties;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.service.EmailService;
 
-
-
 @Service
 public class EmailServiceImpl implements EmailService {
 
