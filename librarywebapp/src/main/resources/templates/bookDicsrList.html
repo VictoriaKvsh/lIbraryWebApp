@@ -23,7 +23,8 @@
 				<td th:text="${book.title}"></td>
 
 				<td th:text="${book.year}"></td>
-				<td><form th:action="@{/books/{bookId}/catalog(bookId=${book.id})}" method="post">
+				<td><form th:action="@{/books/{bookId}/catalog(bookId=${book.id})}"
+						method="post">
 						<input type="submit" value="Add" />
 					</form></td>
 

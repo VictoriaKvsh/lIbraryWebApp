@@ -7,4 +7,6 @@ import by.grodno.vika.librarywebapp.domain.ReadersBook;
 
 public interface ReadersBookRepo extends JpaRepository<ReadersBook, Integer>{
 
+	
+	
 }

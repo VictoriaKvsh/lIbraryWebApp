@@ -40,7 +40,7 @@ public class User {
 	//@NotEmpty(message = "Last name should not be empty")
 	private String lastName;
 
-//	@Email(message = "Email should be valid")
+	@Email(message = "Email should be valid")
 	@Column(nullable = false, unique = true)
 	private String email;
 

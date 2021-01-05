@@ -11,8 +11,6 @@ import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 import by.grodno.vika.librarywebapp.service.UserService;
 
-
-
 @Controller
 public class RegistrationController {
 

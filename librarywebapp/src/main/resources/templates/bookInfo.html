@@ -23,42 +23,24 @@
 				<th scope="col">Year</th>
 				<th scope="col">Status</th>
 				<th scope="col">Order</th>
-
-				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Change
-					status</th>
-				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Who have
-					it</th>
-				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
+				<th scope="col">Submit to reader</th>
+				<th scope="col">Who have it</th>
+				<th scope="col">Delete</th>
 
 
 			</tr>
 		</thead>
 
-		<tr th:each="catalog : ${catalog}">
-			<td th:text="${catalog.bookDiscription.autor}" />
-			<td th:text="${catalog.bookDiscription.title}" />
-			<td th:text="${catalog.bookDiscription.year}" />
-			<td th:text="${catalog.status}" />
-			<td>
-				<form th:action="@{/reader/{catalogId}/add(catalogId=${catalog.id})}" method="post">
-				
-				
-					<input type="submit" value="Order" />
-				</form>
-			</td>
-			<td  sec:authorize="hasRole('ROLE_ADMIN')" th:text="${catalog.id}" /></td>
-
-
-
-		</tr>
+		
 	</table>
 
 	<br />
 	<br />
 
 	<form th:action="@{/books}" method="get">
-		<input type="submit" class="btn btn-dark" value="Books discriptions">
+		<input type="submit" value="Books discriptions" />
 	</form>
+	
 
 
 </body>
