@@ -43,7 +43,7 @@ public class ReadersBookController {
 	
 	
 	@PutMapping("/@@@@@/{catalogId}")
-    public ReadersBook updateCatalog(@PathVariable Integer readersBookId, @Valid @RequestBody ReadersBook readersBookRequest) {
+    public ReadersBook updateStatus(@PathVariable Integer readersBookId, @Valid @RequestBody ReadersBook readersBookRequest) {
         return repo.updateReadersBook(readersBookId, readersBookRequest);
     }
 	

@@ -11,7 +11,7 @@ import by.grodno.vika.librarywebapp.repo.CatalogRepo;
 import by.grodno.vika.librarywebapp.repo.ReadersBookRepo;
 import by.grodno.vika.librarywebapp.repo.UserRepo;
 import by.grodno.vika.librarywebapp.service.ReadersBookService;
-
+import by.grodno.vika.librarywebapp.domain.Status;
 
 @Service
 public class JPAReadersBookService implements ReadersBookService{
@@ -35,6 +35,7 @@ public class JPAReadersBookService implements ReadersBookService{
 		return catalogRepo.findById(catalogId).map(catalog -> {
 			book.setCatalog(catalog);
 			book.setOwnerUser(userRepo.findById(userId).get());
+			catalog.setStatus(Status.BOOKED);
             return readersRepo.save(book);
         }).orElseThrow(() -> new ResourceNotFoundException("Catalog Id " + catalogId + " not found"));
 		
@@ -43,7 +44,9 @@ public class JPAReadersBookService implements ReadersBookService{
 
 	@Override
 	public ReadersBook updateReadersBook(Integer catalogId, ReadersBook bookRequest) {
-		// TODO Auto-generated method stub
+
+
+		
 		return null;
 	}
 

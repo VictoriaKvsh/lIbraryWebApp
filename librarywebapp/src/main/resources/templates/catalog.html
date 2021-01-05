@@ -40,13 +40,30 @@
 			<td th:text="${catalog.bookDiscription.year}" />
 			<td th:text="${catalog.status}" />
 			<td>
-				<form th:action="@{/reader/{catalogId}/add(catalogId=${catalog.id})}" method="post">
-				
-				
+				<form
+					th:action="@{/reader/{catalogId}/add(catalogId=${catalog.id})}"
+					method="post">
+
+
 					<input type="submit" value="Order" />
 				</form>
 			</td>
-			<td  sec:authorize="hasRole('ROLE_ADMIN')" th:text="${catalog.id}" /></td>
+			<td sec:authorize="hasRole('ROLE_ADMIN')">
+			<form th:action="@{/catalog/{catalogId}/status_update(catalogId=${catalog.id})}" method="post">
+			<select name="status">
+					<option
+						th:each="statusOpt : ${T(by.grodno.vika.librarywebapp.domain.Status).values()}"
+						th:value="${statusOpt}" th:text="${statusOpt}"></option>
+			</select>
+			 <input type="submit" value="Submit" />
+    </form>
+			
+			
+			</td>
+			
+			
+			<td sec:authorize="hasRole('ROLE_ADMIN')"
+				th:text="${catalog.id}" /></td>
 
 
 

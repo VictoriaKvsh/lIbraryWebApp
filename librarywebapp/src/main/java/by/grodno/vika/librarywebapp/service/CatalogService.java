@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import by.grodno.vika.librarywebapp.domain.Catalog;
+import by.grodno.vika.librarywebapp.domain.Status;
 
 public interface CatalogService {
 
@@ -11,8 +12,8 @@ public interface CatalogService {
 	List<Catalog> getCatalog();
 	
 	Catalog addCatalog(Integer discriptionId, Catalog catalog);
-	
-	Catalog updateCatalog(Integer catalogId, Catalog catalogRequest);
+		
+	void updateCatalogStatus(Status status, Integer catalogId);
 
 	void deleteCatalog(Integer number);
 
