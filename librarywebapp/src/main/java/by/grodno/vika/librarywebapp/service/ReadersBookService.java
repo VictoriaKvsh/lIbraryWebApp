@@ -13,6 +13,6 @@ public interface ReadersBookService {
 
 	ReadersBook updateReadersBook(Integer catalogId, ReadersBook bookRequest);
 
-	void deleteCatalog(Integer number);
+
 
 }

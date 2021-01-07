@@ -1,5 +1,6 @@
 package by.grodno.vika.librarywebapp.service.imp;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,12 @@ public class JPAReadersBookService implements ReadersBookService{
 
 	@Override
 	public ReadersBook addReadersBook(Integer catalogId, Integer userId, ReadersBook book) {
-		
-		
+			
 		return catalogRepo.findById(catalogId).map(catalog -> {
 			book.setCatalog(catalog);
 			book.setOwnerUser(userRepo.findById(userId).get());
 			catalog.setStatus(Status.BOOKED);
+			book.setDate(new Date());
             return readersRepo.save(book);
         }).orElseThrow(() -> new ResourceNotFoundException("Catalog Id " + catalogId + " not found"));
 		
@@ -45,17 +46,10 @@ public class JPAReadersBookService implements ReadersBookService{
 	@Override
 	public ReadersBook updateReadersBook(Integer catalogId, ReadersBook bookRequest) {
 
-
-		
 		return null;
 	}
 
-	@Override
-	public void deleteCatalog(Integer number) {
-		readersRepo.deleteById(number);
-		
-	}
 	
 	
-
+	
 }
