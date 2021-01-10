@@ -4,7 +4,7 @@ body{
   font-family: 'Mukta', sans-serif;
 	height:100vh;
 	min-height:550px;
-	background-image: url(https://wallpapercave.com/wp/wp5032058.jpg);
+	background-image: url(https://wallpapercave.com/wp/wp3983071.jpg);
 	background-repeat: no-repeat;
 	background-size:cover;
 	background-position:center;
@@ -42,7 +42,7 @@ a{
     display:none;
 }
 .login-reg-panel{
-    color:#B8B8B8;
+    color:#ffffff;
 }
 .login-reg-panel #label-login, 
 .login-reg-panel #label-register{
@@ -150,5 +150,5 @@ a{
 }
 a{
   text-decoration:none;
-  color:#2c7715;
+  color:#ff2626;
 }
