@@ -10,7 +10,7 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+<link href="https://fonts.googleapis.com/css?family=Open+Sans"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script"
 	rel="stylesheet">
@@ -38,7 +38,7 @@
 		<div class="container">
 			<a class="navbar-brand" href="index.html">
 				<h3 class="my-heading ">
-					MOJO<span class="bg-main">AVE</span>
+					W.M.R. <span class="bg-main">LIBRARY</span>
 				</h3>
 			</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -68,7 +68,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">Featured
 							Artists</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Login/Register</a></li>
-					
+
 
 
 				</ul>
@@ -78,19 +78,17 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<form class="form-inline my-2 my-lg-0 col-md-7">
 					<input class="myform-control mr-sm-2" type="search"
-						placeholder="find peoples, instruments, bands and more..."
-						aria-label="Search">
+						placeholder="find books" aria-label="Search">
 					<button class="btn btn-light">
 						<i class="fa fa-search"></i>
 					</button>
 				</form>
-				
+
 				<ul class="navbar-nav ml-auto">
-					 <li sec:authorize="!isAuthenticated()" class="nav-link"><a
-						class="btn btn-primary btn-block btn-login" href="http://localhost:8080/login">Login/Register</a></li>
-					<li class="nav-link">
-                        <a class="btn btn-primary btn-block btn-register" th:href="@{/catalog}">CATalog Register</a>
-                    </li>
+					<li sec:authorize="!isAuthenticated()" class="nav-link"><a
+						class="btn btn-primary btn-block btn-login" href="login">Login/Register</a></li>
+					<li class="nav-link"><a
+						class="btn btn-primary btn-block btn-register" href="catalog">Register</a></li>
 
 				</ul>
 			</div>
@@ -105,13 +103,12 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<h3 class="my-heading">
-						WELCOME TO MOJO<span class="bg-main">AVE</span>
+						Welcome to WILLIAM MADISON RANDAL <span class="bg-main">LIBRARY</span>
 					</h3>
-					<p class="myp-slider text-center">Where musicians unite and
-						become better together</p>
-					<p class="myp text-center">SHARE YOUR MEMORIES   |   CONNECT
-						WITH OTHERS   |   MAKE NEW FRIENDS</p>
-					<a class="btn btn-primary btn-join" th:href="@{/catalog}">BOOK CATALOG</a>
+					<p class="myp-slider text-center"></p>
+					<p class="myp text-center">PLACE WHERE HISTORY COMES TO LIFE...</p>
+					<a class="btn btn-primary btn-join" href="catalog">CATALOG</a>
+
 
 				</div>
 				<div class="col-md-12 text-center mt-5">
@@ -137,7 +134,7 @@
 				<div class="col-md-8">
 					<div class="inner-section wow fadeInUp">
 						<h3>
-							Follow the <span class="bg-main">Next Event</span>
+							USING THE LIBRARY <span class="bg-main">REMOTELY</span>
 						</h3>
 						<br>
 						<p class="text-justify">Lorem Ipsum is simply dummy text of
@@ -257,12 +254,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 mx-auto wow fadeInUp">
-					<h3 class="text-center font-weight-bold">
-						JOIN MOJO<span class="bg-main">AVE</span> GROUPS
-					</h3>
-					<p class=" text-center">Lorem Ipsum is simply dummy text of the
-						printing and typesetting industry. Lorem Ipsum has been the
-						industry's standard dummy text ever since the 1500s.</p>
+					<h3 class="text-center font-weight-bold">EXPLORE OUR
+						COLLECTIONS</h3>
 				</div>
 			</div>
 			<div class="row">
@@ -270,25 +263,16 @@
 					data-wow-duration="1.4s">
 					<div class="card">
 						<img class="card-img-top"
-							src="https://images.pexels.com/photos/258732/pexels-photo-258732.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
+							src="https://library.harvard.edu/sites/default/files/styles/high_resolution_1600_x_734/public/7303652.jpg?h=26522092&itok=YwLlBj9P">
 						<div class="card-block">
 
-							<h4 class="card-title text-center">CATHERINA GAIL</h4>
-
-							<div class="card-text text-center">
-								<div class="social-icons">
-									<a href="#" class="btn btn-circle my-social-btn fb"><i
-										class="fa fa-facebook"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn twitter"><i
-										class="fa fa-twitter"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn google"><i
-										class="fa fa-google"></i></a>
-								</div>
-							</div>
+							<h4 class="card-title text-center">Harvard Faculty Personal
+								and Professional Archives</h4>
 						</div>
 						<div class="card-footer text-center">
-							<small>Lorem Ipsum is simply dummy text of the printing
-								and typesetting</small>
+							<small>Personal and scholarly archives of Harvard faculty
+								and senior administrators active in the Harvard community from
+								the 17th century to the present</small>
 
 						</div>
 					</div>
@@ -297,25 +281,16 @@
 					data-wow-duration="1.4s">
 					<div class="card">
 						<img class="card-img-top"
-							src="https://images.pexels.com/photos/210922/pexels-photo-210922.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
+							src="https://library.harvard.edu/sites/default/files/styles/high_resolution_1600_x_734/public/ms_thr_2023_box6_folder22_0.jpg?h=23df804c&itok=c-_yQI0Z">
 						<div class="card-block">
 
-							<h4 class="card-title text-center">HARVEY RUBE</h4>
+							<h4 class="card-title text-center">Paul Robeson's Othello</h4>
 
-							<div class="card-text text-center">
-								<div class="social-icons">
-									<a href="#" class="btn btn-circle my-social-btn fb"><i
-										class="fa fa-facebook"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn twitter"><i
-										class="fa fa-twitter"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn google"><i
-										class="fa fa-google"></i></a>
-								</div>
-							</div>
+
 						</div>
 						<div class="card-footer text-center">
-							<small>Lorem Ipsum is simply dummy text of the printing
-								and typesetting</small>
+							<small>Records from the first major US production with a
+								multi-racial cast</small>
 
 						</div>
 					</div>
@@ -324,25 +299,17 @@
 					data-wow-duration="1.4s">
 					<div class="card">
 						<img class="card-img-top"
-							src="https://images.pexels.com/photos/756242/pexels-photo-756242.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
+							src="https://library.harvard.edu/sites/default/files/styles/high_resolution_1600_x_734/public/jhplf34.jpg?h=af9b44a7&itok=bAgiVR0V">
 						<div class="card-block">
 
-							<h4 class="card-title text-center">JANET PRIS</h4>
+							<h4 class="card-title text-center">The Leo Fuchs Yiddish
+								Theater Archive</h4>
 
-							<div class="card-text text-center">
-								<div class="social-icons">
-									<a href="#" class="btn btn-circle my-social-btn fb"><i
-										class="fa fa-facebook"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn twitter"><i
-										class="fa fa-twitter"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn google"><i
-										class="fa fa-google"></i></a>
-								</div>
-							</div>
+
 						</div>
 						<div class="card-footer text-center">
-							<small>Lorem Ipsum is simply dummy text of the printing
-								and typesetting</small>
+							<small>Documents the life and career of famed Yiddish
+								comic, musician, dancer, and producer Leo Fuchs</small>
 
 						</div>
 					</div>
@@ -351,29 +318,23 @@
 					data-wow-duration="1.4s">
 					<div class="card">
 						<img class="card-img-top"
-							src="https://images.pexels.com/photos/167445/pexels-photo-167445.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
+							src="https://library.harvard.edu/sites/default/files/styles/high_resolution_1600_x_734/public/bms1446.1.6_bac.jpg?h=d73894fd&itok=5LWXMFvK">
 						<div class="card-block">
 
-							<h4 class="card-title text-center">KEVIN WARD</h4>
+							<h4 class="card-title text-center">Black Empowerment and
+								Unitarian Universalism</h4>
 
-							<div class="card-text text-center">
-								<div class="social-icons">
-									<a href="#" class="btn btn-circle my-social-btn fb"><i
-										class="fa fa-facebook"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn twitter"><i
-										class="fa fa-twitter"></i></a> <a href="#"
-										class="btn btn-circle my-social-btn google"><i
-										class="fa fa-google"></i></a>
-								</div>
-							</div>
+
 						</div>
 						<div class="card-footer text-center">
-							<small>Lorem Ipsum is simply dummy text of the printing
-								and typesetting</small>
+							<small>Explore digitized material related to the
+								Empowerment Controversy in the Unitarian Universalist
+								Association during the 1960s and 1970s</small>
 
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</section>
@@ -517,122 +478,43 @@
 		</div>
 	</section>
 
-	<section class="testimonials bg-light" id="marketplace">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 mx-auto wow fadeInUp">
-					<h3 class="text-center font-weight-bold">
-						MOJO<span class="bg-main">AVE</span> MARKET PLACE
-					</h3>
-					<p class=" text-center">Lorem Ipsum is simply dummy text of the
-						printing and typesetting industry. Lorem Ipsum has been the
-						industry's standard dummy text ever since the 1500s.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-md-4 col-lg-4 mt-4 wow bounceInUp"
-					data-wow-duration="1.4s">
-					<div class="card">
-						<img class="card-img-top h-262"
-							src="https://images.pexels.com/photos/449627/pexels-photo-449627.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
-						<div class="card-block">
-
-							<h4 class="card-title">Lorem Ipsum Dolor Site Amet</h4>
-
-							<div class="card-text">
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's.</p>
-							</div>
-						</div>
-						<div class="card-footer">
-							<small>$ 170</small> <a href="#" class="pull-right">More Info</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-4 mt-4 wow bounceInUp"
-					data-wow-duration="1.4s">
-					<div class="card">
-						<img class="card-img-top h-262"
-							src="https://images.pexels.com/photos/56005/fiji-beach-sand-palm-trees-56005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-						<div class="card-block">
-
-							<h4 class="card-title">Lorem Ipsum Dolor Site Amet</h4>
-
-							<div class="card-text">
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's.</p>
-							</div>
-						</div>
-						<div class="card-footer">
-							<small>$ 170</small> <a href="#" class="pull-right">More Info</a>
-
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-md-4 col-lg-4 mt-4 wow bounceInUp"
-					data-wow-duration="1.4s">
-					<div class="card">
-						<img class="card-img-top h-262"
-							src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
-						<div class="card-block">
-
-							<h4 class="card-title ">Lorem Ipsum Dolor Site Amet</h4>
-
-							<div class="card-text ">
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's.</p>
-							</div>
-						</div>
-						<div class="card-footer">
-							<small>$ 170</small> <a href="#" class="pull-right">More Info</a>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<section class="testimonials text-center ">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 mx-auto wow fadeInUp">
 					<h3 class="text-center font-weight-bold">
-						MOJO<span class="bg-main">AVE</span> FEATURED ARTIST
+						FOR THE <span class="bg-main">LOVE</span> OF LIBRARIES
 					</h3>
-					<p class=" text-center">Lorem Ipsum is simply dummy text of the
-						printing and typesetting industry. Lorem Ipsum has been the
-						industry's standard dummy text ever since the 1500s.</p>
+					<p class=" text-center">Here’s what the greats have to say
+						about what makes libraries so great</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-6 mt-4 wow bounceInUp"
 					data-wow-duration="1.4s">
 					<div class="big-img-3">
-						<img
-							src="https://images.pexels.com/photos/167480/pexels-photo-167480.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+						<img src="https://cdn.britannica.com/58/99358-050-55C5CFC6/EB.jpg"
 							class="img-fluid">
 					</div>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-6 mt-4">
 					<div class="my-right-text wow fadeInUp">
 
-						<p class="text-justify font-italic">Lorem Ipsum is simply
-							dummy text of the printing and typesetting industry. Lorem Ipsum
-							has been the industry's standard dummy text ever since the 1500s,
-							when an unknown printer took a galley of type and scrambled it to
-							make a type specimen book. It has survived not only five
-							centuries, but also the leap into electronic typesetting,
-							remaining essentially unchanged. It was popularised in the 1960s
-							with the release of Letraset sheets. remaining essentially
-							unchanged. It was popularised in the 1960s with the release of
-							Letraset sheets containing Lorem Ipsum passages, Lorem Ipsum has
-							been the industry's standard dummy text ever since the 1500s,
-							when an unknown.</p>
+						<p class="text-justify font-italic">A library is many things.
+							It’s a place to go, to get in out of the rain. It’s a place to go
+							if you want to sit and think. But particularly it is a place
+							where books live, and where you can get in touch with other
+							people, and other thoughts, through books. If you want to find
+							out about something, the information is in the reference books —
+							the dictionaries, the encyclopedias, the atlases. If you like to
+							be told a story, the library is the place to go. Books hold most
+							of the secrets of the world, most of the thoughts that men and
+							women have had.</p>
 
-						<a href="#" class="link-color">Michael U</a>
-						<p class="text-muted">Lorem Ipsum Dolor Sit Amet</p>
+						<a href="#" class="link-color">― E.B. White</a>
+						<p class="text-muted">American essayist, author, humorist,
+							poet and literary stylist</p>
 					</div>
 				</div>
 
@@ -655,8 +537,8 @@
 						<li class="list-inline-item">⋅</li>
 						<li class="list-inline-item"><a href="#">Privacy Policy</a></li>
 					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">© Mojoave 2018. All
-						Rights Reserved.</p>
+					<p class="text-muted small mb-4 mb-lg-0">© Victoria Kuvhinova
+						2021. All Rights Reserved.</p>
 				</div>
 				<div class="col-lg-6 text-center text-lg-right my-auto  wow zoomIn">
 					<ul class="list-inline mb-0">

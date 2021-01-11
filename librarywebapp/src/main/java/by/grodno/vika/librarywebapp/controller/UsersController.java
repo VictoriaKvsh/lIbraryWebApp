@@ -11,6 +11,8 @@ import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.Avatar;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
+import by.grodno.vika.librarywebapp.repo.UserRepo;
 import by.grodno.vika.librarywebapp.service.StorageService;
 import by.grodno.vika.librarywebapp.service.UserService;
 
@@ -40,6 +43,8 @@ public class UsersController {
 	private StorageService imgService;
 	@Autowired
 	private ConversionService convertionService;
+	@Autowired
+	UserRepo uRepo;
 
 	@GetMapping("/users")
 	public String getAllUsers(Model model) {
@@ -49,6 +54,15 @@ public class UsersController {
 
 		return "userList";
 	}
+	
+	@GetMapping("/users/{userId}")
+	public String getUser(Model model, @PathVariable ("userId") Integer currentUser) {
+		
+		User user = userService.getUser(currentUser);
+		model.addAttribute("userN", user);
+
+		return "profile";
+	}
 
 	@PutMapping("/users/{userId}")
 	public User updateUser(@PathVariable Integer userId, @Valid @RequestBody User userRequest) {
@@ -56,8 +70,9 @@ public class UsersController {
 	}
 
 	@DeleteMapping("/users/delete/{userId}")
-	public void deleteUser(@PathVariable Integer userId) {
+	public String deleteUser(@PathVariable Integer userId) {
 		userService.deleteUser(userId);
+		return "redirect:/userList";
 	}
 
 	@GetMapping("/users/findByName/{lname}")
