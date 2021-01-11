@@ -1,5 +1,10 @@
 body{
-    background-color: #f3f3f3;
+    background-image: url(https://wallpapercave.com/wp/wp3983066.jpg);
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-position:center;
+	position:relative;
+    overflow-y: hidden;
    
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -39,7 +44,7 @@ p {
 
 
 .profile-header {
-	height: 150px;
+	height: 130px;
 	width: 100%;
 	position: relative;
 }
@@ -54,8 +59,8 @@ p {
 
 .user-image {
 	position: absolute;
-	height: 80px;
-	width: 80px;
+	height: 115px;
+	width: 115px;
 	border-radius: 50%;
 	bottom: -50%;
 	left: 50%;
@@ -65,15 +70,15 @@ p {
 }
 
 .user-image img {
-	height: 80px;
-	width: 80px;
+	height: 115px;
+	width: 115px;
 	border-radius: 50%;
 	top: -40px;
 	border: 5px solid #777;
 }
 
 .profile-card .profile-content {
-	padding: 50px 20px 30px 20px;
+	padding: 30px 20px 30px 20px;
 }
 
 

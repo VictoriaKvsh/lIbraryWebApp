@@ -52,13 +52,13 @@ public class UsersController {
 		List<User> users = userService.getUsers();
 		model.addAttribute("users", users);
 
-		return "userList";
+		return "usersListFilter";
 	}
 	
-	@GetMapping("/users/{userId}")
-	public String getUser(Model model, @PathVariable ("userId") Integer currentUser) {
-		
-		User user = userService.getUser(currentUser);
+	@GetMapping("/users/profile")
+	public String getUser(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		Integer userId = uRepo.findByEmail(currentUser.getUsername()).getId();
+		User user = userService.getUser(userId);
 		model.addAttribute("userN", user);
 
 		return "profile";

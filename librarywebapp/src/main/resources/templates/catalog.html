@@ -26,8 +26,7 @@
 
 				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Change
 					status</th>
-				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Who have
-					it</th>
+				<th scope="col">Who have it</th>
 				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
 
 
@@ -49,21 +48,20 @@
 				</form>
 			</td>
 			<td sec:authorize="hasRole('ROLE_ADMIN')">
-			<form th:action="@{/catalog/{catalogId}/status_update(catalogId=${catalog.id})}" method="post">
-			<select name="status">
-					<option
-						th:each="statusOpt : ${T(by.grodno.vika.librarywebapp.domain.Status).values()}"
-						th:value="${statusOpt}" th:text="${statusOpt}"></option>
-			</select>
-			 <input type="submit" value="Submit" />
-    </form>
-			
-			
+				<form
+					th:action="@{/catalog/{catalogId}/status_update(catalogId=${catalog.id})}"
+					method="post">
+					<select name="status">
+						<option
+							th:each="statusOpt : ${T(by.grodno.vika.librarywebapp.domain.Status).values()}"
+							th:value="${statusOpt}" th:text="${statusOpt}"></option>
+					</select> <input type="submit" value="Submit" />
+				</form>
+
+
 			</td>
-			
-			
-			<td sec:authorize="hasRole('ROLE_ADMIN')"
-				th:text="${catalog.id}" /></td>
+			<td><a href="users/profile"
+				th:text="${catalog?.readersBook?.ownerUser?.lastName}"></a></td>
 
 
 
