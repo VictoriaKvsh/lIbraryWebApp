@@ -60,7 +60,7 @@
 
 
 			</td>
-			<td><a href="users/profile"
+			<td><a th:href="@{users/profile(userId=${catalog?.readersBook?.ownerUser?.id})}"
 				th:text="${catalog?.readersBook?.ownerUser?.lastName}"></a></td>
 
 

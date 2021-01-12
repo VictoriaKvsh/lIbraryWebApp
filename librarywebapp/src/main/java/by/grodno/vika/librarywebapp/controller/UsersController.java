@@ -55,7 +55,7 @@ public class UsersController {
 		return "usersListFilter";
 	}
 	
-	@GetMapping("/users/profile")
+	@GetMapping("/users/profile/curr_user")
 	public String getUser(Model model, @AuthenticationPrincipal UserDetails currentUser) {
 		Integer userId = uRepo.findByEmail(currentUser.getUsername()).getId();
 		User user = userService.getUser(userId);
@@ -63,6 +63,15 @@ public class UsersController {
 
 		return "profile";
 	}
+	
+	@GetMapping("/users/profile")
+	public String getUserById(@RequestParam Integer userId, Model model) {
+		User user = userService.getUser(userId);
+		model.addAttribute("userN", user);
+
+		return "profile";
+	}
+	
 
 	@PutMapping("/users/{userId}")
 	public User updateUser(@PathVariable Integer userId, @Valid @RequestBody User userRequest) {
