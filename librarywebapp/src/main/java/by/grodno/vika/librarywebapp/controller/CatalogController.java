@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -45,8 +46,9 @@ public class CatalogController {
 		return "redirect:/catalog";
 	}
 	
-	@DeleteMapping("/catalog/{catalogId}")
-	public void deleteCatalog(@PathVariable Integer catalogId) {
+	@PostMapping("/catalog/delete/{catalogId}")
+	public String deleteCatalog(@PathVariable ("catalogId") Integer catalogId) {
 		repo.deleteCatalog(catalogId);
+		return "redirect:/catalog";
 	}
 }

@@ -26,7 +26,7 @@
 
 				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Change
 					status</th>
-				<th scope="col">Who have it</th>
+				<th scope="col">Reader's name</th>
 				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
 
 
@@ -37,31 +37,46 @@
 			<td th:text="${catalog.bookDiscription.autor}" />
 			<td th:text="${catalog.bookDiscription.title}" />
 			<td th:text="${catalog.bookDiscription.year}" />
-			<td th:text="${catalog.status}" />
+			<td><span
+				th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
+				th:text="|${catalog.status}  ${#dates.format(catalog.readersBook.date, 'dd-MM')}|"> </span> <span
+				th:unless="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
+				th:text="${catalog.status}"> </span></td>
+
+
+
+
 			<td>
 				<form
 					th:action="@{/reader/{catalogId}/add(catalogId=${catalog.id})}"
-					method="post">
-
-
+					th:method="post">
 					<input type="submit" value="Order" />
 				</form>
 			</td>
 			<td sec:authorize="hasRole('ROLE_ADMIN')">
 				<form
 					th:action="@{/catalog/{catalogId}/status_update(catalogId=${catalog.id})}"
-					method="post">
+					th:method="post">
 					<select name="status">
 						<option
 							th:each="statusOpt : ${T(by.grodno.vika.librarywebapp.domain.Status).values()}"
 							th:value="${statusOpt}" th:text="${statusOpt}"></option>
 					</select> <input type="submit" value="Submit" />
 				</form>
+			</td>
+			<td><a
+				th:href="@{users/profile(userId=${catalog?.readersBook?.ownerUser?.id})}"
+				th:text="${catalog?.readersBook?.ownerUser?.lastName}"></a></td>
 
+			<td sec:authorize="hasRole('ROLE_ADMIN')">
+				<form
+					th:action="@{/catalog/delete/{catalogId}(catalogId=${catalog.id})}"
+					th:method="post">
+					<input type="submit" value="Delete" />
+
+				</form>
 
 			</td>
-			<td><a th:href="@{users/profile(userId=${catalog?.readersBook?.ownerUser?.id})}"
-				th:text="${catalog?.readersBook?.ownerUser?.lastName}"></a></td>
 
 
 
