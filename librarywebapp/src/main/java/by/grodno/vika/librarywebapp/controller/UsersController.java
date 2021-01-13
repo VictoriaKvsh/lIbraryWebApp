@@ -15,7 +15,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import by.grodno.vika.librarywebapp.domain.ReadersBook;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.Avatar;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
@@ -55,7 +55,7 @@ public class UsersController {
 		return "usersListFilter";
 	}
 	
-	@GetMapping("/users/profile/curr_user")
+	@GetMapping("/users/profile/cur_user")
 	public String getUser(Model model, @AuthenticationPrincipal UserDetails currentUser) {
 		Integer userId = uRepo.findByEmail(currentUser.getUsername()).getId();
 		User user = userService.getUser(userId);
@@ -72,13 +72,24 @@ public class UsersController {
 		return "profile";
 	}
 	
+	@GetMapping("/users/profile/books")
+	public String getUsersBooks(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		Integer userId = uRepo.findByEmail(currentUser.getUsername()).getId();
+		User user = userService.getUser(userId);
+		List<ReadersBook> books = uRepo.findByEmail(currentUser.getUsername()).getReadersBook();
+		
+		model.addAttribute("userN", user);
+		model.addAttribute("books", books);
+		return "profileBookList";
+	}
+	
 
 	@PutMapping("/users/{userId}")
 	public User updateUser(@PathVariable Integer userId, @Valid @RequestBody User userRequest) {
 		return userService.updateUser(userId, userRequest);
 	}
 
-	@DeleteMapping("/users/delete/{userId}")
+	@PostMapping("/users/delete/{userId}")
 	public String deleteUser(@PathVariable Integer userId) {
 		userService.deleteUser(userId);
 		return "redirect:/userList";

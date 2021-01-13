@@ -18,15 +18,15 @@
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th scope="col">Autor</th>
 				<th scope="col">Title</th>
+				<th scope="col">Autor</th>
 				<th scope="col">Year</th>
 				<th scope="col">Status</th>
 				<th scope="col">Order</th>
-
 				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Change
 					status</th>
-				<th scope="col">Reader's name</th>
+				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Reader's
+					name</th>
 				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
 
 
@@ -34,18 +34,15 @@
 		</thead>
 
 		<tr th:each="catalog : ${catalog}">
-			<td th:text="${catalog.bookDiscription.autor}" />
 			<td th:text="${catalog.bookDiscription.title}" />
+			<td th:text="${catalog.bookDiscription.autor}" />
 			<td th:text="${catalog.bookDiscription.year}" />
 			<td><span
 				th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
-				th:text="|${catalog.status}  ${#dates.format(catalog.readersBook.date, 'dd-MM')}|"> </span> <span
+				th:text="|${catalog.status}  ${#dates.format(catalog.readersBook.date, 'dd-MM')}|">
+			</span> <span
 				th:unless="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
 				th:text="${catalog.status}"> </span></td>
-
-
-
-
 			<td>
 				<form
 					th:action="@{/reader/{catalogId}/add(catalogId=${catalog.id})}"
@@ -64,7 +61,7 @@
 					</select> <input type="submit" value="Submit" />
 				</form>
 			</td>
-			<td><a
+			<td sec:authorize="hasRole('ROLE_ADMIN')"><a
 				th:href="@{users/profile(userId=${catalog?.readersBook?.ownerUser?.id})}"
 				th:text="${catalog?.readersBook?.ownerUser?.lastName}"></a></td>
 
@@ -73,19 +70,13 @@
 					th:action="@{/catalog/delete/{catalogId}(catalogId=${catalog.id})}"
 					th:method="post">
 					<input type="submit" value="Delete" />
-
 				</form>
-
 			</td>
-
-
-
 		</tr>
 	</table>
 
 	<br />
 	<br />
-
 	<form th:action="@{/books}" method="get">
 		<input class="btn btn-dark" type="submit" value="Books discriptions">
 	</form>
