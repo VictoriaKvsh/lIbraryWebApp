@@ -53,11 +53,8 @@ public class JPACatalogService implements CatalogService {
 	public void updateCatalogStatus(Status status, Integer catalogId) {
 		catalogRepo.updateCatalogStatus(status, catalogId);
 		if (status.equals(Status.DUE_TO)) {
-
 			catalogRepo.findById(catalogId).get().getReadersBook().setDate(addDate());
-			
-		}
-		else if (status.equals(Status.AVAILABLE)) {
+		} else if (status.equals(Status.AVAILABLE)) {
 			readersRepo.deleteById(catalogRepo.findById(catalogId).get().getReadersBook().getId());
 		}
 	}
@@ -66,10 +63,8 @@ public class JPACatalogService implements CatalogService {
 		Date today = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(today);
-
 		cal.add(Calendar.DATE, 5);
 		Date modifiedDate = cal.getTime();
-
 		return modifiedDate;
 	}
 

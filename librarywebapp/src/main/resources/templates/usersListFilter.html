@@ -23,10 +23,7 @@
 		<h3>The columns titles are merged with the filters inputs thanks
 			to the placeholders attributes</h3>
 		<hr>
-		<p>
-			Inspired by this <a
-				href="http://bootsnipp.com/snippets/featured/panel-tables-with-filter">snippet</a>
-		</p>
+
 		<div class="row">
 			<div class="panel panel-default filterable">
 				<div class="panel-heading">
@@ -43,23 +40,24 @@
 							<th><input type="text" class="form-control" placeholder="Id"
 								disabled></th>
 							<th><input type="text" class="form-control"
-								placeholder="First Name" disabled></th>
-							<th><input type="text" class="form-control"
 								placeholder="Last Name" disabled></th>
 							<th><input type="text" class="form-control"
+								placeholder="First Name" disabled></th>
+							<th><input type="text" class="form-control"
 								placeholder="Email" disabled></th>
-								<th><input type="text" class="form-control"
+							<th><input type="text" class="form-control"
 								placeholder="Role" disabled></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="user : ${users}">
 							<td th:text="${user.id}" />
+							<td th:href="@{info(userId=${user.id})}"
+								th:text="${user.lastName}" />
 							<td th:text="${user.firstName}" />
-							<td th:text="${user.lastName}" />
 							<td th:text="${user.email}" />
 							<td th:text="${user.role}" />
-							
+
 
 						</tr>
 					</tbody>

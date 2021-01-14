@@ -41,4 +41,15 @@ public class ReadersBookController {
 		return "redirect:/catalog";
 	}
 	
+	
+/*	@PutMapping("/@@@@@/{catalogId}")
+    public ReadersBook updateStatus(@PathVariable Integer readersBookId, @Valid @RequestBody ReadersBook readersBookRequest) {
+        return repo.updateReadersBook(readersBookId, readersBookRequest);
+    }
+	
+	*/
+	
+	
+	
+	
 }

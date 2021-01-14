@@ -58,9 +58,12 @@
 
 								<ul class="profile-info-list">
 
-									<a href="cur_user" class="profile-info-list-item"><i
-										class="mdi mdi-account"></i>Profile</a>
+									<a sec:authorize="hasRole('ROLE_ADMIN')"
+										th:href="@{info(userId=${userN.id})}"
+										class="profile-info-list-item"><i class="mdi mdi-account"></i>User Profile</a>
 
+									<a sec:authorize="hasRole('ROLE_READER')" href="info"
+										class="profile-info-list-item"><i class="mdi mdi-account"></i>Profile</a>
 
 									<a href="books" class="profile-info-list-item"><i
 										class="mdi mdi-bookmark-check"></i>Books</a>
@@ -91,10 +94,6 @@
 
 								<div class="col">
 									<div class="card shadow">
-
-
-
-
 										<div class="table-responsive">
 											<table class="table align-items-center table-flush">
 												<thead class="thead-light">
@@ -103,12 +102,12 @@
 														<th scope="col">Autor</th>
 														<th scope="col">Year</th>
 														<th scope="col">Status</th>
-
+														<th scope="col">Date</th>
+														<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Change
+															status</th>
 													</tr>
 												</thead>
 												<tbody>
-
-
 													<tr th:each="book : ${books}">
 														<td><span class="mb-0 text-base"
 															th:text="${book.catalog.bookDiscription.title}" /></span>
@@ -116,22 +115,25 @@
 															th:text="${book.catalog.bookDiscription.autor}" /></span>
 														<td><span class="mb-0 text-base"
 															th:text="${book.catalog.bookDiscription.year}"></span></td>
-
-
 														<td><span class="mb-0 text-base"
 															th:if="${book.catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
 															th:text="|${book.catalog.status}  ${#dates.format(book.date, 'dd-MM')}|">
 														</span> <span class="mb-0 text-base"
 															th:unless="${book.catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
 															th:text="${book.catalog.status}"> </span></td>
-
-
-
-
-
-
-
-
+														<td><span class="mb-0 text-base"
+															th:text=" ${#dates.format(book.date, 'dd-MM')}" ></span></td>
+														<td sec:authorize="hasRole('ROLE_ADMIN')">
+															<form
+																th:action="@{/catalog/{catalogId}/status_update(catalogId=${book.catalog.id})}"
+																th:method="post">
+																<select name="status">
+																	<option
+																		th:each="statusOpt : ${T(by.grodno.vika.librarywebapp.domain.Status).values()}"
+																		th:value="${statusOpt}" th:text="${statusOpt}"></option>
+																</select> <input type="submit" value="Submit" />
+															</form>
+														</td>
 													</tr>
 
 

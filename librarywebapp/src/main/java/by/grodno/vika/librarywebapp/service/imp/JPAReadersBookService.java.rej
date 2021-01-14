@@ -1,0 +1,20 @@
+diff a/librarywebapp/src/main/java/by/grodno/vika/librarywebapp/service/imp/JPAReadersBookService.java b/librarywebapp/src/main/java/by/grodno/vika/librarywebapp/service/imp/JPAReadersBookService.java	(rejected hunks)
+@@ -46,17 +46,10 @@
+ 	@Override
+ 	public ReadersBook updateReadersBook(Integer catalogId, ReadersBook bookRequest) {
+ 
+-
+-		
+ 		return null;
+ 	}
+ 
+-	@Override
+-	public void deleteCatalog(Integer number) {
+-		readersRepo.deleteById(number);
+-		
+-	}
+ 	
+ 	
+-
++	
+ }

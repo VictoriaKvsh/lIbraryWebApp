@@ -43,12 +43,12 @@ public class JPAReadersBookService implements ReadersBookService{
 		
 	}
 
-	@Override
+/*	@Override
 	public ReadersBook updateReadersBook(Integer catalogId, ReadersBook bookRequest) {
 
 		return null;
 	}
-
+*/
 	
 	
 	

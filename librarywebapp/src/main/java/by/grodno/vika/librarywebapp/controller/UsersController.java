@@ -54,35 +54,32 @@ public class UsersController {
 
 		return "usersListFilter";
 	}
-	
-	@GetMapping("/users/profile/cur_user")
-	public String getUser(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-		Integer userId = uRepo.findByEmail(currentUser.getUsername()).getId();
+
+	@GetMapping("/users/profile/info")
+	public String getUserById(@RequestParam(value = "userId", required = false) Integer userId, Model model,
+			@AuthenticationPrincipal UserDetails currentUser) {
+		if (userId == null) {
+			userId = uRepo.findByEmail(currentUser.getUsername()).getId();
+		}
 		User user = userService.getUser(userId);
 		model.addAttribute("userN", user);
-
 		return "profile";
 	}
-	
-	@GetMapping("/users/profile")
-	public String getUserById(@RequestParam Integer userId, Model model) {
-		User user = userService.getUser(userId);
-		model.addAttribute("userN", user);
 
-		return "profile";
-	}
-	
 	@GetMapping("/users/profile/books")
-	public String getUsersBooks(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-		Integer userId = uRepo.findByEmail(currentUser.getUsername()).getId();
+	public String getUsersBooks(@RequestParam(value = "userId", required = false) Integer userId, Model model,
+			@AuthenticationPrincipal UserDetails currentUser) {
+		if (userId == null) {
+			userId = uRepo.findByEmail(currentUser.getUsername()).getId();
+		}
+
 		User user = userService.getUser(userId);
 		List<ReadersBook> books = uRepo.findByEmail(currentUser.getUsername()).getReadersBook();
-		
+
 		model.addAttribute("userN", user);
 		model.addAttribute("books", books);
 		return "profileBookList";
 	}
-	
 
 	@PutMapping("/users/{userId}")
 	public User updateUser(@PathVariable Integer userId, @Valid @RequestBody User userRequest) {

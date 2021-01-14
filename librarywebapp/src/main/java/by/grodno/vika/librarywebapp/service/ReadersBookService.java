@@ -11,7 +11,7 @@ public interface ReadersBookService {
 
 	ReadersBook addReadersBook(Integer discriptionId, Integer userId, ReadersBook book);
 
-	ReadersBook updateReadersBook(Integer catalogId, ReadersBook bookRequest);
+//	ReadersBook updateReadersBook(Integer catalogId, ReadersBook bookRequest);
 
 
 
