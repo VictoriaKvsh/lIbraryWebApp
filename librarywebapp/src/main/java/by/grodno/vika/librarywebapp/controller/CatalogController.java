@@ -31,7 +31,7 @@ public class CatalogController {
 	public String saveCatalog(@PathVariable ("bookId") Integer discriptionId, Catalog catalog) {
 		repo.addCatalog(discriptionId, catalog);
 		
-		return "redirect:/books";
+		return "redirect:/users/profile/books";
 	}	
 	
 	

@@ -117,7 +117,7 @@
 															th:text="${book.catalog.bookDiscription.year}"></span></td>
 														<td><span class="mb-0 text-base"
 															th:if="${book.catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
-															th:text="|${book.catalog.status}  ${#dates.format(book.date, 'dd-MM')}|">
+															th:text="|${book.catalog.status}  ${#dates.format(book.dueDate, 'dd-MM')}|">
 														</span> <span class="mb-0 text-base"
 															th:unless="${book.catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
 															th:text="${book.catalog.status}"> </span></td>
@@ -127,11 +127,11 @@
 															<form
 																th:action="@{/catalog/{catalogId}/status_update(catalogId=${book.catalog.id})}"
 																th:method="post">
-																<select name="status">
-																	<option
+																<select class="mb-0 text-sm" name="status">
+																	<option class="mb-0 text-sm"
 																		th:each="statusOpt : ${T(by.grodno.vika.librarywebapp.domain.Status).values()}"
-																		th:value="${statusOpt}" th:text="${statusOpt}"></option>
-																</select> <input type="submit" value="Submit" />
+																		th:value="${statusOpt}" th:text="${statusOpt}" th:if="${statusOpt != book.catalog.status}"></option>
+																</select> <input class="btn btn-light" type="submit" value="Submit" />
 															</form>
 														</td>
 													</tr>

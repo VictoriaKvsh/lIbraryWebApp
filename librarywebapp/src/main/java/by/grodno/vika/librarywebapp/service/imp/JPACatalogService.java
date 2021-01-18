@@ -53,7 +53,7 @@ public class JPACatalogService implements CatalogService {
 	public void updateCatalogStatus(Status status, Integer catalogId) {
 		catalogRepo.updateCatalogStatus(status, catalogId);
 		if (status.equals(Status.DUE_TO)) {
-			catalogRepo.findById(catalogId).get().getReadersBook().setDate(addDate());
+			catalogRepo.findById(catalogId).get().getReadersBook().setDueDate(addDate());
 		} else if (status.equals(Status.AVAILABLE)) {
 			readersRepo.deleteById(catalogRepo.findById(catalogId).get().getReadersBook().getId());
 		}

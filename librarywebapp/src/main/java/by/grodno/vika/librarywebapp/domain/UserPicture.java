@@ -19,9 +19,10 @@ public class UserPicture {
 
 	@OneToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private User userPic;
 
 	private String fileName;
+	
 	private String fileLocation;
 
 }

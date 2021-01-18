@@ -52,7 +52,7 @@ public class UsersController {
 		List<User> users = userService.getUsers();
 		model.addAttribute("users", users);
 
-		return "usersListFilter";
+		return "usersList";
 	}
 
 	@GetMapping("/users/profile/info")

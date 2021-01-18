@@ -37,14 +37,14 @@
 			<td th:text="${catalog.bookDiscription.year}" />
 			<td><span
 				th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
-				th:text="|${catalog.status}  ${#dates.format(catalog.readersBook.date, 'dd-MM')}|">
+				th:text="|${catalog.status}  ${#dates.format(catalog.readersBook.dueDate, 'dd-MM')}|">
 			</span> <span
 				th:unless="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
 				th:text="${catalog.status}"> </span></td>
 			<td>
 				<form
 					th:action="@{/reader/{catalogId}/add(catalogId=${catalog.id})}"
-					th:method="post">
+					th:method="post" th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).AVAILABLE}">
 					<input type="submit" value="Order" />
 				</form>
 			</td>

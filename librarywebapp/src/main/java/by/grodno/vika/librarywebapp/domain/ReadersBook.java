@@ -30,6 +30,10 @@ public class ReadersBook {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dueDate;
+	
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")

@@ -35,10 +35,11 @@ public class ImageStoreService implements StorageService {
 
 		File file2 = new File(string);
 
-		UserPicture picture = user.getPicture();
+	/*	UserPicture picture = user.getPicture();
 		if (picture == null) {
 			picture = new UserPicture();
-		}
+		}*/
+		UserPicture picture= new UserPicture();
 		picture.setFileName(file2.getAbsolutePath());
 
 		user.setPicture(picture);
