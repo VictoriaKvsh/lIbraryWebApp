@@ -30,20 +30,18 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	//@NotEmpty(message = "Name should not be empty")
 	private String firstName;
 
-	//@NotEmpty(message = "Last name should not be empty")
 	private String lastName;
 
-	@Email(message = "Email should be valid")
+	@Email
 	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Column(nullable = false, updatable = false)
 	private UserRole role;
 	
-	@OneToOne(mappedBy = "userPic", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
 	private UserPicture picture;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

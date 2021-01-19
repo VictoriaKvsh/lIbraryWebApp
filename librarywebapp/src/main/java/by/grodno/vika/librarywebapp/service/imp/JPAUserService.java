@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.domain.UserCredentials;
+import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.repo.UserCredentialsRepo;
@@ -35,18 +36,23 @@ public class JPAUserService implements UserService {
 	@Override
 	public void saveUser(User user) {
 		repo.save(user);
-		emailService.sendUserActivationEmail(user);
+		if (user.getCredentials().get(0).getActive() == false) {
+			emailService.sendUserActivationEmail(user);
+		}
+
 	}
 
 	@Override
-	public User updateUser(Integer number, User userReqest) {
-		return repo.findById(number).map(user -> {
-			user.setFirstName(userReqest.getFirstName());
-			user.setLastName(userReqest.getLastName());
-			user.setEmail(userReqest.getEmail());
-			return repo.save(user);
-		}).orElseThrow(() -> new ResourceNotFoundException("User Id " + number + " not found"));
+	public void updateUser(User user) {
+		User findById = repo.findById(user.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		findById.setFirstName(user.getFirstName());
+		findById.setLastName(user.getLastName());
+		repo.save(findById);
 	}
+	
+	
+	
+	
 
 	@Override
 	public void deleteUser(Integer number) {
@@ -64,8 +70,6 @@ public class JPAUserService implements UserService {
 	public List<User> findByLName(String lastName) {
 		return repo.findByLastName(lastName);
 	}
-
-	
 
 	@Override
 	public User getUser(Integer id) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import by.grodno.vika.librarywebapp.domain.User;
+import by.grodno.vika.librarywebapp.dto.UserDTO;
 
 public interface UserService {
 
@@ -13,7 +14,7 @@ public interface UserService {
 
 	void saveUser(User user);
 	
-	User updateUser(Integer number, User userReqest);
+	void updateUser(User user);
 
 	void deleteUser(Integer number);
 	

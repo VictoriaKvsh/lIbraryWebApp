@@ -11,14 +11,15 @@ import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,7 +63,7 @@ public class UsersController {
 			userId = uRepo.findByEmail(currentUser.getUsername()).getId();
 		}
 		User user = userService.getUser(userId);
-		model.addAttribute("userN", user);
+		model.addAttribute("user", user);
 		return "profile";
 	}
 
@@ -76,14 +77,38 @@ public class UsersController {
 		User user = userService.getUser(userId);
 		List<ReadersBook> books = uRepo.findByEmail(currentUser.getUsername()).getReadersBook();
 
-		model.addAttribute("userN", user);
+		model.addAttribute("user", user);
 		model.addAttribute("books", books);
 		return "profileBookList";
 	}
 
-	@PutMapping("/users/{userId}")
-	public User updateUser(@PathVariable Integer userId, @Valid @RequestBody User userRequest) {
-		return userService.updateUser(userId, userRequest);
+	
+	@GetMapping("/users/profile/edit")
+	
+	public String editUserForm(@AuthenticationPrincipal UserDetails currentUser, Model model) {
+
+		model.addAttribute("user", userService.getUser(uRepo.findByEmail(currentUser.getUsername()).getId()));
+
+		return "profileEdit";
+	}
+	
+	@PostMapping("/users/profile/edit")
+	public String updateUser(@Valid UserDTO userDTO, BindingResult br, Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		if (br.hasErrors()) {
+			model.addAttribute("userDTO", userDTO);
+			return "editUserView";
+		}
+		
+		User user = new User();
+		Integer id = uRepo.findByEmail(currentUser.getUsername()).getId();
+		user.setId(id);
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+		
+		
+		userService.updateUser(user);
+		
+		 return "redirect:/users/profile/info";
 	}
 
 	@PostMapping("/users/delete/{userId}")

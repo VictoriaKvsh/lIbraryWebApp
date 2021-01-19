@@ -36,7 +36,7 @@ public class BookDiscriptionController {
 	public String getAllBooks(Model model) {
 		model.addAttribute("books", repo.getBooks());
 		model.addAttribute("byAutor", Comparator.comparing(BookDiscription :: getAutor));
-		return "bookDicsrList";
+		return "bookInfo";
 	}
 
 	@PutMapping("/books/{bookId}")
