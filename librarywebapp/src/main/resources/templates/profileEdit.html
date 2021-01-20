@@ -68,7 +68,7 @@
 							<hr>
 							<p class="card-description">User Information</p>
 							<form th:action="@{/users/profile/edit}" method="post"
-								th:object="${user}">
+								th:object="${user}" enctype="multipart/form-data">
 								<ul class="about">
 
 									<li class="about-items"><i
@@ -98,8 +98,16 @@
 									<li class="about-items"><i class="mdi mdi-cake icon-sm "></i><span
 										class="about-item-name">Birthday:</span><span
 										class="about-item-detail text-base">****</span></li>
-
 								</ul>
+								
+								
+						<div class="col-lg-7 p-2">
+						
+							<input class="custom-file-input" type="file" name="file"
+								id="inputGroupFile03"> <label class="custom-file-label"
+								for="inputGroupFile03">Choose file</label>
+						</div>
+						
 								<input class="btn btn-primary" type="submit" value="Edit" />
 							</form>
 						</div>
@@ -115,7 +123,14 @@
 
 	</div>
 
-
+<script>
+            $('#inputGroupFile03').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        </script>
 
 
 </body>

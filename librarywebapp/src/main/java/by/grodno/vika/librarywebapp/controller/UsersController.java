@@ -82,26 +82,31 @@ public class UsersController {
 		return "profileBookList";
 	}
 
-	
 	@GetMapping("/users/profile/edit")
-	
+
 	public String editUserForm(@AuthenticationPrincipal UserDetails currentUser, Model model) {
 
 		model.addAttribute("user", userService.getUser(uRepo.findByEmail(currentUser.getUsername()).getId()));
 
 		return "profileEdit";
 	}
-	
+
 	@PostMapping("/users/profile/edit")
-	public String updateUser(@Valid UserDTO userDTO, BindingResult br, Model model, @AuthenticationPrincipal UserDetails currentUser) {
+	public String updateUser(@Valid UserDTO userDTO, BindingResult br, Model model,
+			@AuthenticationPrincipal UserDetails currentUser,
+			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
 		if (br.hasErrors()) {
 			model.addAttribute("userDTO", userDTO);
 			return "editUserView";
 		}
-		userDTO.setId(uRepo.findByEmail(currentUser.getUsername()).getId());
+		Integer id = uRepo.findByEmail(currentUser.getUsername()).getId();
+		if (!file.isEmpty()) {
+			imgService.store(id, file);
+		}
+		userDTO.setId(id);
 		userService.updateUser(userDTO);
-		
-		 return "redirect:/users/profile/info";
+
+		return "redirect:/users/profile/info";
 	}
 
 	@PostMapping("/users/delete/{userId}")

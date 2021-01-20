@@ -63,21 +63,21 @@ p {
 }
 
 .profile-header {
-	height: 130px;
+	height: 190px;
 	width: 100%;
 	position: relative;
 }
 
 .cover-image {
-	height: 150px;
+	height: 220px;
 	width: 100%;
 	overflow: hidden;
 }
 
 .user-image {
 	position: absolute;
-	height: 115px;
-	width: 115px;
+	height: 160px;
+	width: 160px;
 	border-radius: 50%;
 	bottom: -50%;
 	left: 50%;
@@ -87,8 +87,8 @@ p {
 }
 
 .user-image img {
-	height: 115px;
-	width: 115px;
+	height: 160px;
+	width: 160px;
 	border-radius: 50%;
 	top: -40px;
 	border: 5px solid #777;
@@ -121,7 +121,7 @@ p {
 }
 
 .profile-card ul.profile-info-list {
-	padding: 0;
+	padding: 10px;
 	margin: 10px 0;
 	list-style: none;
 	font-size: 1rem;
@@ -135,7 +135,7 @@ p {
 }
 
 .profile-card a.profile-info-list-item {
-	margin: 10px 0;
+	margin: 20px 0;
 	padding: 15px;
 	background-color: #F1F2F3;
 	display: block;
