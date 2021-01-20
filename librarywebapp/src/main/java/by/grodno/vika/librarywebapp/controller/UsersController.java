@@ -98,15 +98,8 @@ public class UsersController {
 			model.addAttribute("userDTO", userDTO);
 			return "editUserView";
 		}
-		
-		User user = new User();
-		Integer id = uRepo.findByEmail(currentUser.getUsername()).getId();
-		user.setId(id);
-		user.setFirstName(userDTO.getFirstName());
-		user.setLastName(userDTO.getLastName());
-		
-		
-		userService.updateUser(user);
+		userDTO.setId(uRepo.findByEmail(currentUser.getUsername()).getId());
+		userService.updateUser(userDTO);
 		
 		 return "redirect:/users/profile/info";
 	}

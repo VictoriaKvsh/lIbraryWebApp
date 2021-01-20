@@ -14,7 +14,7 @@ public interface UserService {
 
 	void saveUser(User user);
 	
-	void updateUser(User user);
+	void updateUser(UserDTO userDTO);
 
 	void deleteUser(Integer number);
 	
@@ -25,6 +25,8 @@ public interface UserService {
 	List<User> findByExample(User userSample);
 
 	List<User> findByLName(String lastName);
+
+	
 	
 
 	

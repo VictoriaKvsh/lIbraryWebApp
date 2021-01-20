@@ -43,10 +43,10 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		User findById = repo.findById(user.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-		findById.setFirstName(user.getFirstName());
-		findById.setLastName(user.getLastName());
+	public void updateUser(UserDTO userDTO) {
+		User findById = repo.findById(userDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		findById.setFirstName(userDTO.getFirstName());
+		findById.setLastName(userDTO.getLastName());
 		repo.save(findById);
 	}
 	
