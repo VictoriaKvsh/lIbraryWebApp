@@ -15,7 +15,6 @@ import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.repo.UserCredentialsRepo;
 import by.grodno.vika.librarywebapp.repo.UserRepo;
-import by.grodno.vika.librarywebapp.service.EmailService;
 import by.grodno.vika.librarywebapp.service.UserService;
 
 @Service
@@ -26,7 +25,7 @@ public class JPAUserService implements UserService {
 	@Autowired
 	private UserCredentialsRepo credRepo;
 	@Autowired
-	private EmailService emailService;
+	private EmailSenderService emailSenderService;
 
 	@Override
 	public List<User> getUsers() {
@@ -37,22 +36,20 @@ public class JPAUserService implements UserService {
 	public void saveUser(User user) {
 		repo.save(user);
 		if (user.getCredentials().get(0).getActive() == false) {
-			emailService.sendUserActivationEmail(user);
+
+			emailSenderService.contextUserInfo(user);
 		}
 
 	}
 
 	@Override
 	public void updateUser(UserDTO userDTO) {
-		User findById = repo.findById(userDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		User findById = repo.findById(userDTO.getId())
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 		findById.setFirstName(userDTO.getFirstName());
 		findById.setLastName(userDTO.getLastName());
 		repo.save(findById);
 	}
-	
-	
-	
-	
 
 	@Override
 	public void deleteUser(Integer number) {

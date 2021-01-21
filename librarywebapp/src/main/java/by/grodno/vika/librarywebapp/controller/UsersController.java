@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -118,13 +116,6 @@ public class UsersController {
 	@GetMapping("/users/findByName/{lname}")
 	public List<User> getUserByLName(@PathVariable("lname") String lname) {
 		return userService.findByLName(lname);
-	}
-
-	@PostMapping("/users/{id}/img")
-	public String handleFileUpload(@PathVariable("id") Integer id, @RequestParam("file") MultipartFile file)
-			throws IOException {
-		imgService.store(id, file);
-		return "redirect:/users";
 	}
 
 	@GetMapping("/users/{id}/img")

@@ -1,7 +1,10 @@
 package by.grodno.vika.librarywebapp.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
+import javax.mail.MessagingException;
 
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
