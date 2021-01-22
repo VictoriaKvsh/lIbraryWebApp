@@ -55,7 +55,7 @@ public class EmailSenderService {
 		properties.put("host", "http://localhost:8080/activate/"+user.getId());
 
 		Mail mail = Mail.builder()
-				.from("no-reply@library.com")
+				.from("contact@library.com")
 				.to(user.getEmail())
 				.htmlTemplate(new Mail.HtmlTemplate("email", properties))
 				.subject("Activation link for Library.com")

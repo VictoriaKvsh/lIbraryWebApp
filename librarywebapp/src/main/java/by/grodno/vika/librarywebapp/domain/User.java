@@ -52,6 +52,8 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerUser")
 	private List<ReadersBook> readersBook;
+	
+	private String userRequestToken;
 
 	
 	

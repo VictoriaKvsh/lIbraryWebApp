@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.domain.UserCredentials;
@@ -88,6 +89,36 @@ public class JPAUserService implements UserService {
 			credRepo.save(next);
 			return user;
 		}).orElseThrow(() -> new UserNotFoundException());
+
+	}
+
+	@Override
+	public void updateUserRequestToken(String token, String email) throws UserNotFoundException {
+		User user = repo.findByEmail(email);
+		if (user != null) {
+			user.setUserRequestToken(token);
+			repo.save(user);
+		} else {
+			throw new UserNotFoundException("Could not find any user with the email " + email);
+		}
+	}
+
+	@Override
+	public User getByUserRequestToken(String token) {
+		return repo.findByUserRequestToken(token);
+	}
+
+	@Override
+	@Transactional
+	public void updatePassword(User user, String newPassword) {
+
+		List<UserCredentials> credList = user.getCredentials();
+		UserCredentials cred = new UserCredentials(user.getId(), user.getCredentials().get(0).getCreationDate(), true,
+				newPassword);
+		credList.add(0, cred);
+		user.setCredentials(credList);
+		user.setUserRequestToken(null);
+		repo.save(user);
 
 	}
 

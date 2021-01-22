@@ -8,6 +8,7 @@ import javax.mail.MessagingException;
 
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
+import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 
 public interface UserService {
 
@@ -28,6 +29,12 @@ public interface UserService {
 	List<User> findByExample(User userSample);
 
 	List<User> findByLName(String lastName);
+
+	void updateUserRequestToken(String token, String email) throws UserNotFoundException;
+
+	User getByUserRequestToken(String token);
+
+	void updatePassword(User user, String newPassword) throws UserNotFoundException;
 
 	
 	

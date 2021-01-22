@@ -95,7 +95,7 @@ public class UsersController {
 			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
 		if (br.hasErrors()) {
 			model.addAttribute("userDTO", userDTO);
-			return "editUserView";
+			return "profileEdit";
 		}
 		Integer id = uRepo.findByEmail(currentUser.getUsername()).getId();
 		if (!file.isEmpty()) {
