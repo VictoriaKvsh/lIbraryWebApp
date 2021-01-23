@@ -17,7 +17,6 @@ import by.grodno.vika.librarywebapp.domain.UserCredentials;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.service.UserService;
 
-
 @Service
 public class UserAuthService implements UserDetailsService {
 
@@ -27,17 +26,32 @@ public class UserAuthService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		return service.findByEmail(username).map(userFromBd -> {
-			Optional<UserCredentials> findAny = userFromBd.getCredentials().stream().filter(UserCredentials::getActive)
-					.findAny();
-			String password = findAny.map(UserCredentials::getPassword).orElseThrow(() -> new UserNotFoundException());
-
-			return new User(userFromBd.getEmail(), password, toAuthorities(userFromBd));
-		}).orElse(null);
+		by.grodno.vika.librarywebapp.domain.User userFromBd = service.findByEmail(username);
+		if (userFromBd == null || userFromBd.getCredentials().getActive().equals(false)) {
+			throw new UserNotFoundException();
+		}
+		else {
+			return new User(userFromBd.getEmail(), userFromBd.getCredentials().getPassword(),
+					toAuthorities(userFromBd));
+		}
 	}
 
-	
-	
+//		
+//		return service.findByEmail(username).map(userFromBd -> {
+//			Optional<UserCredentials> findAny = userFromBd.getCredentials().filter(UserCredentials::getActive)
+//					.findAny();
+//			String password = findAny.map(UserCredentials::getPassword).orElseThrow(() -> new UserNotFoundException());
+//
+//			return new User(userFromBd.getEmail(), userFromBd.getCredentials().getPassword(), toAuthorities(userFromBd));
+//		}).orElse(null);
+//	}
+//	
+
+//
+//	return service.findByEmail(username).map(
+//			userFromBd -> new User(userFromBd.getEmail(), userFromBd.getCredentials().getPassword(), toAuthorities(userFromBd)))
+//			.orElse(null);
+
 	private Collection<? extends GrantedAuthority> toAuthorities(
 			by.grodno.vika.librarywebapp.domain.User findByUserName) {
 		return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + findByUserName.getRole().name()));

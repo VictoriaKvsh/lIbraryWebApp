@@ -22,7 +22,7 @@ public interface UserService {
 
 	void deleteUser(Integer number);
 	
-	Optional<User> findByEmail(String email);
+	User findByEmail(String email);
 	
 	void activateUser(Integer id);
 

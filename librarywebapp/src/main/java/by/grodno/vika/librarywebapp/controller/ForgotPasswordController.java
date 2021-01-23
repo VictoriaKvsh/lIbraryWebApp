@@ -83,7 +83,6 @@ public class ForgotPasswordController {
 	public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
 	    User user = userService.getByUserRequestToken(token);
 	    model.addAttribute("token", token);
-	     
 	    if (user == null) {
 	        model.addAttribute("message", "Invalid Token");
 	        return "message";
@@ -97,7 +96,6 @@ public class ForgotPasswordController {
 	public String processResetPassword(HttpServletRequest request, Model model) {
 	    String token = request.getParameter("token");
 	    String password = request.getParameter("password");
-	     
 	    User user = userService.getByUserRequestToken(token);
 	    model.addAttribute("title", "Reset your password");
 	     

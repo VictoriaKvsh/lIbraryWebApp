@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,17 +28,20 @@ public class JPAUserService implements UserService {
 	private UserCredentialsRepo credRepo;
 	@Autowired
 	private EmailSenderService emailSenderService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 
 	@Override
 	public List<User> getUsers() {
 		return repo.findAll();
 	}
 
+	@Transactional
 	@Override
 	public void saveUser(User user) {
 		repo.save(user);
-		if (user.getCredentials().get(0).getActive() == false) {
-
+		if (user.getCredentials().getActive() == false) {
 			emailSenderService.contextUserInfo(user);
 		}
 
@@ -75,18 +79,20 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	public Optional<User> findByEmail(String email) {
-		return Optional.ofNullable(repo.findByEmail(email));
+	public User findByEmail(String email) {
+		return repo.findByEmail(email);
 	}
 
 	@Override
+	@Transactional
 	public void activateUser(Integer id) {
 		Optional<User> findById = repo.findById(id);
 
 		findById.map(user -> {
-			UserCredentials next = user.getCredentials().iterator().next();
-			next.setActive(true);
-			credRepo.save(next);
+			UserCredentials cred = user.getCredentials();
+			cred.setActive(true);
+			user.setUserRequestToken(null);
+			credRepo.save(cred);
 			return user;
 		}).orElseThrow(() -> new UserNotFoundException());
 
@@ -111,12 +117,7 @@ public class JPAUserService implements UserService {
 	@Override
 	@Transactional
 	public void updatePassword(User user, String newPassword) {
-
-		List<UserCredentials> credList = user.getCredentials();
-		UserCredentials cred = new UserCredentials(user.getId(), user.getCredentials().get(0).getCreationDate(), true,
-				newPassword);
-		credList.add(0, cred);
-		user.setCredentials(credList);
+		user.getCredentials().setPassword(passwordEncoder.encode(newPassword));
 		user.setUserRequestToken(null);
 		repo.save(user);
 

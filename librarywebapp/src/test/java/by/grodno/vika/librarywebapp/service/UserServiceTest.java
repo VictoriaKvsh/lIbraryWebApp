@@ -20,22 +20,22 @@ public class UserServiceTest {
 	@Autowired
 	UserRepo repo;
 	
-	@Test
-	public void updatePassword() throws UserNotFoundException {
-       
-		log.info("setting new email");
-		User user = repo.findByEmail("testing@gmail.com");
-       
-        	List <UserCredentials> credList = new ArrayList<UserCredentials>();
-        	credList.add(0, new UserCredentials(2, null, true, "111"));
-        	credList.add(0, new UserCredentials(2, null, true, null));
-        	user.getCredentials().get(0).setPassword("222");
-        	
-        	credList.add(0, new UserCredentials());
-        	
-        	repo.save(user);
-        
-    }
+//	@Test
+//	public void updatePassword() throws UserNotFoundException {
+//       
+//		log.info("setting new email");
+//		User user = repo.findByEmail("testing@gmail.com");
+//       
+//        	List <UserCredentials> credList = new ArrayList<UserCredentials>();
+//        	credList.add(0, new UserCredentials(2, null, true, "111"));
+//        	credList.add(0, new UserCredentials(2, null, true, null));
+//        	user.getCredentials().setPassword("222");
+//        	
+//        	credList.add(0, new UserCredentials());
+//        	
+//        	repo.save(user);
+//        
+//    }
 	
 
 }

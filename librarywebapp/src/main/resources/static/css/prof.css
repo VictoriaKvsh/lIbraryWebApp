@@ -58,6 +58,7 @@ p {
 
 .card .card-description {
 	margin-bottom: .875rem;
+	padding-right: 100px;
 	font-weight: 400;
 	color: #76838f;
 }

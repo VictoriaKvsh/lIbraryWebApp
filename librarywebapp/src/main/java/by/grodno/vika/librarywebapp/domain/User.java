@@ -40,23 +40,21 @@ public class User {
 
 	@Column(nullable = false, updatable = false)
 	private UserRole role;
-	
-	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
 	private UserPicture picture;
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(
-			joinColumns = @JoinColumn(name = "u1"), 
-			inverseJoinColumns = @JoinColumn(name = "u2"))
-	private List<UserCredentials> credentials;
-	
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "cred_user", joinColumns = {
+			@JoinColumn(name = "u1") }, inverseJoinColumns = {
+					@JoinColumn(name = "u2",  unique = true) })
+	private UserCredentials credentials;
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerUser")
 	private List<ReadersBook> readersBook;
-	
+
 	private String userRequestToken;
 
-	
-	
 	@Override
 	public String toString() {
 		return "User: [" + firstName + ", " + lastName + "]";

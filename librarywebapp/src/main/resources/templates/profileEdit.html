@@ -12,7 +12,13 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.css">
-
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"
+	rel="stylesheet" type="text/css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
@@ -23,44 +29,30 @@
 	<!-- partial -->
 	<div class="main-panel">
 		<div class="c0ontainer">
-
-
 			<div class="roww">
 				<div class="col-md-3 grid-margin stretch-card">
 					<div class="card">
 						<div class="profile-card">
-
 							<div class="profile-header">
-
-
 								<div class="user-image">
 									<img th:src="@{/users/{uid}/img(uid=${user.id})}" class="img ">
 								</div>
 							</div>
-
 							<div class="profile-content">
 								<div class="profile-name"
 									th:text="|${user.firstName} ${user.lastName}|"></div>
 								<div class="profile-designation" th:text=${user.role}></div>
-
 								<ul class="profile-info-list">
-
 									<a href="info" class="profile-info-list-item"><i
 										class="mdi mdi-account"></i>Profile</a>
 
 									<a href="books" class="profile-info-list-item"><i
 										class="mdi mdi-bookmark-check"></i>Books</a>
-
-
-
-
-
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="col-md-9 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
@@ -70,21 +62,18 @@
 							<form th:action="@{/users/profile/edit}" method="post"
 								th:object="${user}" enctype="multipart/form-data">
 								<ul class="about">
-
 									<li class="about-items"><i
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">First Name:</span><span
-										class="about-item-detail text-base"> <input type="text"
+										class="about-item-detail text-base"> <input class="form-control"  type="text"
 											th:field="*{firstName}" /></span></li>
 									<li class="about-items"><i
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">Last Name:</span><span
-										class="about-item-detail text-base"> <input type="text"
+										class="about-item-detail text-base"> <input class="form-control" type="text"
 											th:field="*{lastName}" /></span></li>
-
-
 								</ul>
-								<p class="card-description" text-base>Contact Information</p>
+								<p class="card-description">Contact Information</p>
 								<ul class="about">
 									<li class="about-items"><i class="mdi mdi-phone icon-sm "></i><span
 										class="about-item-name">Phone:</span><span
@@ -96,43 +85,51 @@
 										class="about-item-detail text-base" th:text=${user.email}></span></li>
 
 									<li class="about-items"><i class="mdi mdi-cake icon-sm "></i><span
-										class="about-item-name">Birthday:</span><span
-										class="about-item-detail text-base">****</span></li>
+										class="about-item-name">Birthday:</span> 
+											<span class="input-group date about-item-detail text-base">
+												<input class="form-control new-input" type="text" /> <span
+													class="input-group-append">
+													<button class="btn btn-outline-secondary" type="button">
+														<i class="fa fa-calendar"></i>
+													</button>
+												</span>
+										</span>	
+									</li>
 								</ul>
-								
-								
-						<div class="col-lg-7 p-2">
-						
-							<input class="custom-file-input" type="file" name="file"
-								id="inputGroupFile03"> <label class="custom-file-label"
-								for="inputGroupFile03">Choose file</label>
-						</div>
-						
-								<input class="btn btn-outline-secondary" type="submit" value="Edit" />
+
+								<div class="col-lg-7 p-2">
+									<input class="custom-file-input" type="file" name="file"
+										id="inputGroupFile03"> <label
+										class="custom-file-label" for="inputGroupFile03">Choose
+										your profile photo</label>
+								</div>
+								<input class="btn btn-outline-secondary" type="submit"
+									value="Edit" />
 							</form>
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
-
-
 		</div>
-
 	</div>
-
-<script>
-            $('#inputGroupFile03').on('change',function(){
-                //get the file name
-                var fileName = $(this).val();
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            })
-        </script>
-
-
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+	<script>
+		$('#inputGroupFile03').on('change', function() {
+			//get the file name
+			var fileName = $(this).val();
+			//replace the "Choose a file" label
+			$(this).next('.custom-file-label').html(fileName);
+		})
+	</script>
+	<script>
+		$(function() {
+			$(".date").datepicker({
+				autoclose : true,
+				todayHighlight : true
+			});
+		});
+	</script>
 </body>
 
 </html>

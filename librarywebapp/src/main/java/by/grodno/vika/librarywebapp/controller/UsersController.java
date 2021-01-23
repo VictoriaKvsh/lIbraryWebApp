@@ -83,9 +83,7 @@ public class UsersController {
 	@GetMapping("/users/profile/edit")
 
 	public String editUserForm(@AuthenticationPrincipal UserDetails currentUser, Model model) {
-
 		model.addAttribute("user", userService.getUser(uRepo.findByEmail(currentUser.getUsername()).getId()));
-
 		return "profileEdit";
 	}
 

@@ -2,6 +2,8 @@ package by.grodno.vika.librarywebapp.service.imp;
 
 import by.grodno.vika.librarywebapp.config.Mail;
 import by.grodno.vika.librarywebapp.domain.User;
+import by.grodno.vika.librarywebapp.service.UserService;
+import net.bytebuddy.utility.RandomString;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -22,6 +24,9 @@ public class EmailSenderService {
 
     @Autowired
     private JavaMailSender emailSender;
+    
+    @Autowired
+	private UserService userService;
 
     @Autowired
     private SpringTemplateEngine templateEngine;
@@ -33,7 +38,6 @@ public class EmailSenderService {
                 StandardCharsets.UTF_8.name());
 
         String html = getHtmlContent(mail);
-
         helper.setTo(mail.getTo());
         helper.setFrom(mail.getFrom());
         helper.setSubject(mail.getSubject());
@@ -47,12 +51,14 @@ public class EmailSenderService {
         context.setVariables(mail.getHtmlTemplate().getProps());
         return templateEngine.process(mail.getHtmlTemplate().getTemplate(), context);
     }
+    
      public void contextUserInfo(User user)  {
-		
-
+    	 String token = RandomString.make(30);
+    	 userService.updateUserRequestToken(token, user.getEmail());
+    	 
 		Map<String, Object> properties = new HashMap<String, Object>();
 		properties.put("name", user.getFirstName());
-		properties.put("host", "http://localhost:8080/activate/"+user.getId());
+		properties.put("host", "http://localhost:8080/activate_user?token="+token);
 
 		Mail mail = Mail.builder()
 				.from("contact@library.com")
