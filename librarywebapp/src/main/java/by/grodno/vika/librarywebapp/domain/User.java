@@ -53,6 +53,9 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerUser")
 	private List<ReadersBook> readersBook;
 
+	private  AuthenticationProvider authProvader;
+	
+	
 	private String userRequestToken;
 
 	@Override

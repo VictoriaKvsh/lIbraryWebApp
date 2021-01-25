@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.Avatar;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.repo.UserRepo;
+import by.grodno.vika.librarywebapp.security.CustomOAuth2User;
 import by.grodno.vika.librarywebapp.service.StorageService;
 import by.grodno.vika.librarywebapp.service.UserService;
 
@@ -56,10 +58,17 @@ public class UsersController {
 
 	@GetMapping("/users/profile/info")
 	public String getUserById(@RequestParam(value = "userId", required = false) Integer userId, Model model,
-			@AuthenticationPrincipal UserDetails currentUser) {
+			@AuthenticationPrincipal UserDetails currentUser, Authentication authentication) {
 		if (userId == null) {
 			userId = uRepo.findByEmail(currentUser.getUsername()).getId();
 		}
+		if (userId == null) {
+			CustomOAuth2User oauth2User = (CustomOAuth2User) authentication.getPrincipal();
+			String email = oauth2User.getEmail();
+			User user = uRepo.findByEmail(email);
+			userId = user.getId();
+		}
+
 		User user = userService.getUser(userId);
 		model.addAttribute("user", user);
 		return "profile";
@@ -82,20 +91,20 @@ public class UsersController {
 
 	@GetMapping("/users/profile/edit")
 
-	public String editUserForm(@AuthenticationPrincipal UserDetails currentUser, Model model) {
-		model.addAttribute("user", userService.getUser(uRepo.findByEmail(currentUser.getUsername()).getId()));
+	public String editUserForm(@AuthenticationPrincipal UserDetails principal, Model model) {
+		model.addAttribute("user", userService.getUser(uRepo.findByEmail(principal.getUsername()).getId()));
 		return "profileEdit";
 	}
 
 	@PostMapping("/users/profile/edit")
 	public String updateUser(@Valid UserDTO userDTO, BindingResult br, Model model,
-			@AuthenticationPrincipal UserDetails currentUser,
+			@AuthenticationPrincipal UserDetails principal,
 			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
 		if (br.hasErrors()) {
 			model.addAttribute("userDTO", userDTO);
 			return "profileEdit";
 		}
-		Integer id = uRepo.findByEmail(currentUser.getUsername()).getId();
+		Integer id = uRepo.findByEmail(principal.getUsername()).getId();
 		if (!file.isEmpty()) {
 			imgService.store(id, file);
 		}
@@ -127,11 +136,11 @@ public class UsersController {
 		}
 	}
 
-	@GetMapping("/apis/v1/users")
-	@ResponseBody
-	public List<UserDTO> getAllUsers() {
-		return userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
-				.collect(Collectors.toList());
-	}
+//	@GetMapping("/apis/v1/users")
+//	@ResponseBody
+//	public List<UserDTO> getAllUsers() {
+//		return userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
+//				.collect(Collectors.toList());
+//	}
 
 }

@@ -1,11 +1,7 @@
 package by.grodno.vika.librarywebapp.service;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
-
-import javax.mail.MessagingException;
-
+import by.grodno.vika.librarywebapp.domain.AuthenticationProvider;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
@@ -36,9 +32,8 @@ public interface UserService {
 
 	void updatePassword(User user, String newPassword) throws UserNotFoundException;
 
-	
-	
+	void createNewUserAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider);
 
-	
+	void updateUserAfterOAuthLoginSuccess(User user, String name, AuthenticationProvider provider);
 
 }
