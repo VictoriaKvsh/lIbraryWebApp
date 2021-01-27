@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.service.UserService;
@@ -19,6 +21,7 @@ public class UserAuthService implements UserDetailsService {
 	@Autowired
 	private UserService service;
 
+	@Transactional
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
