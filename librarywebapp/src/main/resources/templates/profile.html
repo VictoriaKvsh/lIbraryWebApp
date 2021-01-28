@@ -5,14 +5,15 @@
 <title>Profile</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<th:block th:include="fragments/navBar.html :: headerfiles">
-</th:block>
 <link rel="stylesheet" href="/css/prof.css">
 
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-
+	
+<link
+	href="cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet" id="bootstrap-css">
+	
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.css">
 
@@ -23,6 +24,9 @@
 
 </head>
 <body>
+
+<th:block th:include="fragments/navBar.html :: navBar">
+</th:block>
 	<!-- partial -->
 	<div class="main-panel">
 		<div class="c0ontainer">

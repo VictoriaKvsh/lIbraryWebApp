@@ -3,142 +3,75 @@
 	xmlns:th="https://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:fragment="headerfiles">
-<link rel="stylesheet" href="css/ind.css">
+<style>
+.hm-gradient {
+	background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+}
+
+.darken-grey-text {
+	color: #2E2E2E;
+}
+
+.navbar .dropdown-menu a:hover {
+	color: #616161 !important;
+}
+
+.darken-grey-text {
+	color: #2E2E2E;
+}
+</style>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Kaushan+Script"
-	rel="stylesheet">
-<link
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet"
-	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css" />
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-	media="screen">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
 
 <body>
-<div th:fragment="navBar">
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
-		<div class="container">
-			<a class="navbar-brand" href="/">
-				<h3 class="my-heading ">
-					<span class="bg-main">WMR LIBRARY</span>
-				</h3>
-			</a>
+	<div th:fragment="navBar">
+		
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<a class="navbar-brand font-bold" href="#">WMR LIBRARY</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarText1" aria-controls="navbarText1"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText1">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a
+							class="nav-link waves-effect waves-light" href="/">HOME <span
+								class="sr-only">(current)</span></a></li>
+						<li class="nav-item"><a
+							class="nav-link waves-effect waves-light" th:href="@{/catalog}">Catalog</a></li>
+						<li class="nav-item"><a
+							class="nav-link waves-effect waves-light" th:href="@{/users/profile/info}">Profile</a></li>
+							<li class="nav-item"><a
+							class="nav-link waves-effect waves-light" th:href="@{/users}">Users</a></li>
+							<li class="nav-item"><a
+							class="nav-link waves-effect waves-light" th:href="@{/books_list}">Books discriptions</a></li>
+							<li class="nav-item"><a
+							class="nav-link waves-effect waves-light" th:href="@{/login}">Login/Register</a></li>
+					</ul>
+					<form class="form-inline">
+						<input class="form-control mr-sm-2" type="text"
+							aria-label="Search">
+						<button class="btn btn-outline-white btn-sm my-0" type="submit">Search</button>
+					</form>
+				</div>
+			</nav>
 
-
-
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<form class="form-inline my-2 my-lg-0 col-md-7">
-					<input class="myform-control mr-sm-2" type="search"
-						placeholder="find books///" aria-label="Search">
-					<button class="btn btn-light">
-						<i class="fa fa-search"></i>
-					</button>
-				</form>
-
-				<ul class="navbar-nav ml-auto">
-					<li sec:authorize="!isAuthenticated()" class="nav-link"><a
-						class="btn btn-primary btn-block btn-login" href="login">Login/Register</a></li>
-
-
-				</ul>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-link"></li>
-
-
-				</ul>
-
-			</div>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="fa fa-bars mfa-white"></span>
-			</button>
-
-			<div id="main">
-				<a href="javascript:void(0)" class="openNav"><span
-					class="fa fa-bars" onclick="openNav()"></span></a>
-			</div>
-
-
-
-			<div id="mySidenav" class="sidenav">
-				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-				<ul class="mob-ul">
-					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="catalog">Catalog</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="users/profile/info">Profile</a></li>
-					<li class="nav-item"><a class="nav-link" href="books">Books
-							discriptions</a></li>
-					<li class="nav-item"><a class="nav-link" href="users">Users</a></li>
-					<li class="nav-item"><a class="nav-link" href="login">Login/Register</a></li>
-
-
-				</ul>
-			</div>
 		</div>
-	</nav>
-
-</div>
 </body>
-<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-	<script>
-		new WOW().init();
-	</script>
-	<script>
-		$(window).scroll(function() {
 
-			var topWindow = $(window).scrollTop();
-			var topWindow = topWindow * 1.5;
-			var windowHeight = $(window).height();
-			var position = topWindow / windowHeight;
-			position = 1 - position;
-
-			$('#bottom').css('opacity', position);
-
-		});
-
-		function openNav() {
-			document.getElementById("mySidenav").style.width = "250px";
-			document.getElementById("main").style.display = "0";
-			document.body.style.backgroundColor = "white";
-		}
-
-		function closeNav() {
-			document.getElementById("mySidenav").style.width = "0";
-			document.getElementById("main").style.marginRight = "0";
-			document.body.style.backgroundColor = "white";
-		}
-
-		$(window).on("scroll", function() {
-			if ($(this).scrollTop() > 10) {
-				$("nav.navbar").addClass("mybg-dark");
-				$("nav.navbar").addClass("navbar-shrink");
-
-			} else {
-				$("nav.navbar").removeClass("mybg-dark");
-				$("nav.navbar").removeClass("navbar-shrink");
-
-			}
-
-		});</script>
 </html>

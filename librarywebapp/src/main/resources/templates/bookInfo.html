@@ -34,8 +34,7 @@
 
 
 <body>
-<th:block th:include="fragments/navBar.html :: navBar">
-        </th:block>
+<th:block th:include="fragments/navBar.html :: navBar"></th:block>
         
 	<div class="container">
 		<div class="table-wrapper">
@@ -72,7 +71,7 @@
 
 							<td th:text="${book.year}"></td>
 							<td><form
-									th:action="@{/books/{bookId}/catalog(bookId=${book.id})}"
+									th:action="@{/books_list/{bookId}/catalog(bookId=${book.id})}"
 									method="post">
 									<input type="submit" value="Add" />
 								</form></td>

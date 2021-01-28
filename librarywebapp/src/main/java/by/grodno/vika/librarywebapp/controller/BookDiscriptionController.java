@@ -30,28 +30,28 @@ public class BookDiscriptionController {
 	@Autowired
 	CatalogService catalogRepo;
 
-	@PostMapping(path = "/books/new")
+	@PostMapping(path = "/books_list/new")
 	public String saveBook(BookDiscription bookDiscription) {
 		repo.addBook(bookDiscription);
 		
 		return "redirect:/books";
 	}
 
-	@GetMapping("/books")
+	@GetMapping("/books_list")
 	public String getAllBooks(Model model) {
 		model.addAttribute("books", repo.getBooks());
 		model.addAttribute("byAutor", Comparator.comparing(BookDiscription :: getAutor));
 		return "bookInfo";
 	}
 	
-	@PostMapping(path = "/books/{bookId}/catalog")
+	@PostMapping(path = "/books_list/{bookId}/catalog")
 	public String saveCatalog(@PathVariable ("bookId") Integer discriptionId, Catalog catalog) {
 		catalogRepo.addCatalog(discriptionId, catalog);
 		
-		return "redirect:/books";
+		return "redirect:/books_list";
 	}	
 
-	@PutMapping("/books/{bookId}")
+	@PutMapping("/books_list/{bookId}")
 	public BookDiscription updateBookDiscr(@PathVariable Integer bookId,
 			@Valid @RequestBody BookDiscription bookRequest) {
 		return repo.updateBook(bookId, bookRequest);
@@ -62,13 +62,13 @@ public class BookDiscriptionController {
 		repo.deleteBook(bookId);
 	}
 
-	@GetMapping("/books/page")
+	@GetMapping("/books_list/page")
 	public List<BookDiscription> getUsersPage(@RequestParam("pnum") Integer pnum,
 			@RequestParam("psize") Integer psize) {
 		return repo.getPage(pnum, psize).getContent();
 	}
 
-	@GetMapping("/books/search")
+	@GetMapping("/books_list/search")
 	public List<BookDiscription> findByExample(@RequestParam(value = "autor", required = false) String autor,
 			@RequestParam(value = "title", required = false) String title) {
 		BookDiscription bookDiscription = new BookDiscription(null, autor, title, null, null);

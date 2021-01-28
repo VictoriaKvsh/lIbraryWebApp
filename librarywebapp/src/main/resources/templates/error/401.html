@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
 <style>
@@ -26,6 +26,7 @@ body {
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+<th:block th:include="fragments/navBar.html :: navBar"></th:block>
 	<div class="page-wrap d-flex flex-row align-items-center">
 		<div class="container">
 			<div class="row justify-content-center">
