@@ -560,7 +560,7 @@ li.list-inline-item a {
 	.mob-ul{list-style-type: none; padding-left: 0;}
 }
 
-@media only screen and (min-width: 768px) and (max-width: 959px) {
+@media only screen and (min-width: 768px) and (max-width: 2000px) {
 .navbar-toggler {display: none !important;}
 	#main {display: block;}
 	.header-wrap .navbar .nav-link {color: #fff;}

@@ -27,12 +27,7 @@ public class CatalogController {
 		 return "catalog";
 	}
 	
-	@PostMapping(path = "/books/{bookId}/catalog")
-	public String saveCatalog(@PathVariable ("bookId") Integer discriptionId, Catalog catalog) {
-		repo.addCatalog(discriptionId, catalog);
-		
-		return "redirect:/users/profile/books";
-	}	
+	
 	
 	
 	@PostMapping("/catalog/{catalogId}/status_update")

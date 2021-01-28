@@ -105,11 +105,8 @@ public class UsersController {
 			return "profileEdit";
 		}
 		Integer id = uRepo.findByEmail(principal.getUsername()).getId();
-		if (!file.isEmpty()) {
-			imgService.store(id, file);
-		}
 		userDTO.setId(id);
-		userService.updateUser(userDTO);
+		userService.updateUser(userDTO, file);
 
 		return "redirect:/users/profile/info";
 	}

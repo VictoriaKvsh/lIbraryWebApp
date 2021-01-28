@@ -1,12 +1,20 @@
 package by.grodno.vika.librarywebapp.exception;
 
+
 public class UserNotFoundException extends RuntimeException {
 
-	public UserNotFoundException() {
-        super();
-    }
+	private String userInfo;
 
-    public UserNotFoundException(String message) {
-        super(message);
-    }
+	public String getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(String userInfo) {
+		this.userInfo = userInfo;
+	}
+	
+	
+	
+
+	
 }

@@ -1,24 +1,35 @@
 package by.grodno.vika.librarywebapp.service.imp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import by.grodno.vika.librarywebapp.domain.AuthenticationProvider;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.domain.UserCredentials;
+import by.grodno.vika.librarywebapp.domain.UserPicture;
 import by.grodno.vika.librarywebapp.domain.UserRole;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.repo.UserCredentialsRepo;
+import by.grodno.vika.librarywebapp.repo.UserPictureRepo;
 import by.grodno.vika.librarywebapp.repo.UserRepo;
 import by.grodno.vika.librarywebapp.service.UserService;
 
@@ -30,10 +41,11 @@ public class JPAUserService implements UserService {
 	@Autowired
 	private UserCredentialsRepo credRepo;
 	@Autowired
+	private UserPictureRepo pictureRepo;
+	@Autowired
 	private EmailSenderService emailSenderService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
 
 	@Override
 	public List<User> getUsers() {
@@ -51,11 +63,32 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	public void updateUser(UserDTO userDTO) {
+	public void updateUser(UserDTO userDTO, MultipartFile file) {
 		User findById = userRepo.findById(userDTO.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 		findById.setFirstName(userDTO.getFirstName());
 		findById.setLastName(userDTO.getLastName());
+		if (file != null) {
+			String string = UUID.randomUUID().toString();
+			File file2 = new File(string);
+			UserPicture picture = findById.getPicture();
+			if (picture == null) {
+				picture = new UserPicture();
+			}
+			picture.setFileName(file2.getName());
+			picture.setFileLocation(file2.getAbsolutePath());
+
+			findById.setPicture(picture);
+
+			try (InputStream in = file.getInputStream(); OutputStream out = new FileOutputStream(file2)) {
+				IOUtils.copy(in, out);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			picture.setUser(findById);
+			pictureRepo.save(picture);
+		}
+
 		userRepo.save(findById);
 	}
 
@@ -108,7 +141,10 @@ public class JPAUserService implements UserService {
 			user.setUserRequestToken(token);
 			userRepo.save(user);
 		} else {
-			throw new UserNotFoundException("Could not find any user with the email " + email);
+			UserNotFoundException userNotFoundException = new UserNotFoundException();
+			userNotFoundException.setUserInfo(email);
+
+			throw userNotFoundException;
 		}
 	}
 
@@ -134,9 +170,9 @@ public class JPAUserService implements UserService {
 		user.setLastName(name);
 		user.setRole(UserRole.READER);
 		user.setAuthProvader(provider);
-		UserCredentials creds = new UserCredentials(null,  new Date(), true, null);
+		UserCredentials creds = new UserCredentials(null, new Date(), true, null);
 		user.setCredentials(creds);
-		
+
 		userRepo.save(user);
 	}
 
@@ -145,7 +181,7 @@ public class JPAUserService implements UserService {
 
 		user.setLastName(name);
 		user.setAuthProvader(provider);
-		
+
 		userRepo.save(user);
 	}
 

@@ -1,6 +1,9 @@
 package by.grodno.vika.librarywebapp.service;
 
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import by.grodno.vika.librarywebapp.domain.AuthenticationProvider;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
@@ -14,7 +17,7 @@ public interface UserService {
 
 	void saveUser(User user);
 	
-	void updateUser(UserDTO userDTO);
+	void updateUser(UserDTO userDTO, MultipartFile file);
 
 	void deleteUser(Integer number);
 	

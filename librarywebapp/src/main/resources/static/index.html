@@ -41,6 +41,31 @@
 					WMR <span class="bg-main">LIBRARY</span>
 				</h3>
 			</a>
+
+
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<form class="form-inline my-2 my-lg-0 col-md-7">
+					<input class="myform-control mr-sm-2" type="search"
+						placeholder="find books///" aria-label="Search">
+					<button class="btn btn-light">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
+
+				<ul class="navbar-nav ml-auto">
+					<li sec:authorize="!isAuthenticated()" class="nav-link"><a
+						class="btn btn-primary btn-block btn-login" href="login">Login/Register</a></li>
+
+
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-link"></li>
+
+
+				</ul>
+
+			</div>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -58,38 +83,16 @@
 			<div id="mySidenav" class="sidenav">
 				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 				<ul class="mob-ul">
-					<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Marketplace</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Featured
-							Artists</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Login/Register</a></li>
-
+					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="catalog">Catalog</a></li>
+					<li class="nav-item"><a class="nav-link" href="users/profile/info">Profile</a></li>
+					<li class="nav-item"><a class="nav-link" href="books">Books discriptions</a></li>
+					<li class="nav-item"><a class="nav-link" href="users">Users</a></li>
+					<li class="nav-item"><a class="nav-link" href="login">Login/Register</a></li>
 
 
 				</ul>
 			</div>
-
-
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<form class="form-inline my-2 my-lg-0 col-md-7">
-					<input class="myform-control mr-sm-2" type="search"
-						placeholder="find books" aria-label="Search">
-					<button class="btn btn-light">
-						<i class="fa fa-search"></i>
-					</button>
-				</form>
-
-				<ul class="navbar-nav ml-auto">
-					<li sec:authorize="!isAuthenticated()" class="nav-link"><a
-						class="btn btn-primary btn-block btn-login" href="login">Login/Register</a></li>
-					<li class="nav-link"><a
-						class="btn btn-primary btn-block btn-register"
-						href="users/profile/info">Profile</a></li>
-
-				</ul>
-			</div>
-
 		</div>
 	</nav>
 

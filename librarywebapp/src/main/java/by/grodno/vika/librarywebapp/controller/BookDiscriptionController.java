@@ -17,13 +17,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import by.grodno.vika.librarywebapp.domain.BookDiscription;
+import by.grodno.vika.librarywebapp.domain.Catalog;
 import by.grodno.vika.librarywebapp.service.BookDiscriptionService;
+import by.grodno.vika.librarywebapp.service.CatalogService;
 
 @Controller
 public class BookDiscriptionController {
 
 	@Autowired
 	BookDiscriptionService repo;
+	
+	@Autowired
+	CatalogService catalogRepo;
 
 	@PostMapping(path = "/books/new")
 	public String saveBook(BookDiscription bookDiscription) {
@@ -38,6 +43,13 @@ public class BookDiscriptionController {
 		model.addAttribute("byAutor", Comparator.comparing(BookDiscription :: getAutor));
 		return "bookInfo";
 	}
+	
+	@PostMapping(path = "/books/{bookId}/catalog")
+	public String saveCatalog(@PathVariable ("bookId") Integer discriptionId, Catalog catalog) {
+		catalogRepo.addCatalog(discriptionId, catalog);
+		
+		return "redirect:/books";
+	}	
 
 	@PutMapping("/books/{bookId}")
 	public BookDiscription updateBookDiscr(@PathVariable Integer bookId,
