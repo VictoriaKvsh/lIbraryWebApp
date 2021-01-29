@@ -66,30 +66,34 @@
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">First Name:</span><span
 										class="about-item-detail text-base"> <input
-											class="form-control" type="text" th:field="*{firstName}" /></span></li>
+											class="form-control" type="text" th:field="*{firstName}" /><span
+											th:if="${#fields.hasErrors('firstName')}"
+											th:errors="*{firstName}">Full name error</span></span></li>
 									<li class="about-items"><i
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">Last Name:</span><span
 										class="about-item-detail text-base"> <input
-											class="form-control" type="text" th:field="*{lastName}" /></span></li>
+											class="form-control" type="text" th:field="*{lastName}" /><span
+											th:if="${#fields.hasErrors('lastName')}"
+											th:errors="*{lastName}">Last name error</span></span></li>
 								</ul>
 								<p class="card-description">Contact Information</p>
 								<ul class="about">
 									<li class="about-items"><i class="mdi mdi-phone icon-sm "></i><span
 										class="about-item-name">Phone:</span><span
 										class="about-item-detail text-base"><input
-											class="form-control" type="text" th:field="*{phoneNumber}" /></span></li>
-									
-									
+											class="form-control" type="text" th:field="*{phoneNumber}" />
+											<span th:if="${#fields.hasErrors('phoneNumber')}"
+											th:errors="*{phoneNumber}">Phone error</span></span></li>
 
-								
 									<li class="about-items"><i
 										class="mdi mdi-email-outline icon-sm "></i><span
 										class="about-item-name">Email:</span><span
 										class="about-item-detail text-base" th:text=${user.email}></span></li>
 
 
-									<li class="about-items"><i class="mdi mdi-map-marker icon-sm "></i><span
+									<li class="about-items"><i
+										class="mdi mdi-map-marker icon-sm "></i><span
 										class="about-item-name">Address:</span><span
 										class="about-item-detail text-base"><input
 											class="form-control" type="text" th:field="*{address}" /></span></li>

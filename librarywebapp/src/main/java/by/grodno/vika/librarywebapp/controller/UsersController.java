@@ -3,8 +3,6 @@ package by.grodno.vika.librarywebapp.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import by.grodno.vika.librarywebapp.domain.ReadersBook;
@@ -97,10 +94,10 @@ public class UsersController {
 	}
 
 	@PostMapping("/users/profile/edit")
-	public String updateUser(@Valid UserDTO userDTO, BindingResult br, Model model,
-			@AuthenticationPrincipal UserDetails principal,
-			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
-		if (br.hasErrors()) {
+	public String updateUser(@Valid UserDTO userDTO, @RequestParam(value = "file", required = false) MultipartFile file,
+			BindingResult bindingResult, Model model, @AuthenticationPrincipal UserDetails principal)
+			throws IOException {
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("userDTO", userDTO);
 			return "profileEdit";
 		}
