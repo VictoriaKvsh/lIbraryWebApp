@@ -65,36 +65,34 @@
 									<li class="about-items"><i
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">First Name:</span><span
-										class="about-item-detail text-base"> <input class="form-control"  type="text"
-											th:field="*{firstName}" /></span></li>
+										class="about-item-detail text-base"> <input
+											class="form-control" type="text" th:field="*{firstName}" /></span></li>
 									<li class="about-items"><i
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">Last Name:</span><span
-										class="about-item-detail text-base"> <input class="form-control" type="text"
-											th:field="*{lastName}" /></span></li>
+										class="about-item-detail text-base"> <input
+											class="form-control" type="text" th:field="*{lastName}" /></span></li>
 								</ul>
 								<p class="card-description">Contact Information</p>
 								<ul class="about">
 									<li class="about-items"><i class="mdi mdi-phone icon-sm "></i><span
 										class="about-item-name">Phone:</span><span
-										class="about-item-detail text-base">*******</span></li>
+										class="about-item-detail text-base"><input
+											class="form-control" type="text" th:field="*{phoneNumber}" /></span></li>
+									
+									
 
+								
 									<li class="about-items"><i
 										class="mdi mdi-email-outline icon-sm "></i><span
 										class="about-item-name">Email:</span><span
 										class="about-item-detail text-base" th:text=${user.email}></span></li>
 
-									<li class="about-items"><i class="mdi mdi-cake icon-sm "></i><span
-										class="about-item-name">Birthday:</span> 
-											<span class="input-group date about-item-detail text-base">
-												<input class="form-control new-input" type="text" /> <span
-													class="input-group-append">
-													<button class="btn btn-outline-secondary" type="button">
-														<i class="fa fa-calendar"></i>
-													</button>
-												</span>
-										</span>	
-									</li>
+
+									<li class="about-items"><i class="mdi mdi-map-marker icon-sm "></i><span
+										class="about-item-name">Address:</span><span
+										class="about-item-detail text-base"><input
+											class="form-control" type="text" th:field="*{address}" /></span></li>
 								</ul>
 
 								<div class="col-lg-7 p-2">

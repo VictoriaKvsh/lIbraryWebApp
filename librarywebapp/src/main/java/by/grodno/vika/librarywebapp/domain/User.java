@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,9 +31,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
+	
+	@Length(min = 3, max = 20)
 	private String firstName;
-
+	
+	@Length(min = 3, max = 20)
 	private String lastName;
 
 	@Email
@@ -41,7 +45,7 @@ public class User {
 	@Column(nullable = false, updatable = false)
 	private UserRole role;
 
-	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private UserPicture picture;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -55,6 +59,10 @@ public class User {
 
 	private  AuthenticationProvider authProvader;
 	
+	@Length(min=10,max=13)
+	private String phoneNumber;
+	
+	private String address;
 	
 	private String userRequestToken;
 

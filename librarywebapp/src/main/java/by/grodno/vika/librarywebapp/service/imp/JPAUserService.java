@@ -68,6 +68,8 @@ public class JPAUserService implements UserService {
 				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 		findById.setFirstName(userDTO.getFirstName());
 		findById.setLastName(userDTO.getLastName());
+		findById.setPhoneNumber(userDTO.getPhoneNumber());
+		findById.setAddress(userDTO.getAddress());
 		if (file != null) {
 			String string = UUID.randomUUID().toString();
 			File file2 = new File(string);
@@ -85,7 +87,7 @@ public class JPAUserService implements UserService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			picture.setUser(findById);
+			
 			pictureRepo.save(picture);
 		}
 
