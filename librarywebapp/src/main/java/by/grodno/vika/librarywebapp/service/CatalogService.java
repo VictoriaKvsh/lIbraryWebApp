@@ -1,21 +1,21 @@
 package by.grodno.vika.librarywebapp.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 
 import by.grodno.vika.librarywebapp.domain.Catalog;
 import by.grodno.vika.librarywebapp.domain.Status;
 
 public interface CatalogService {
 
-	
-	List<Catalog> getCatalog();
+	Page<Catalog> getCatalog(int pageNum);
 	
 	Catalog addCatalog(Integer discriptionId, Catalog catalog);
 		
 	void updateCatalogStatus(Status status, Integer catalogId);
 
 	void deleteCatalog(Integer number);
+
+	
 
 
 	

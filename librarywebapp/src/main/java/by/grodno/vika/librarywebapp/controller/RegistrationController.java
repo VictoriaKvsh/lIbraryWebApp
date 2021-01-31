@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
+import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
 import by.grodno.vika.librarywebapp.service.UserService;
 
 @Controller
@@ -28,10 +29,9 @@ public class RegistrationController {
 	String activation(@Param(value = "token") String token, Model model) {
 		User user = service.getByUserRequestToken(token);
 		if (user == null) {
-	        model.addAttribute("message", "Invalid Token");
-	        return "message";
-	    } else {           
 	       
+			throw new ResourceNotFoundException("Invalid token" );
+	    } else {           
 	    	service.activateUser(user.getId());
 	        model.addAttribute("message", "You have successfully changed your password.");
 	    }

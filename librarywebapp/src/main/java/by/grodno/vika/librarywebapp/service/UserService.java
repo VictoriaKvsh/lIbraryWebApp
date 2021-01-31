@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
-import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 
 public interface UserService {
 
@@ -29,12 +28,14 @@ public interface UserService {
 
 	List<User> findByLName(String lastName);
 
-	void updateUserRequestToken(String token, String email) throws UserNotFoundException;
+	void updateUserRequestToken(String token, String email);
 
 	User getByUserRequestToken(String token);
 
-	void updatePassword(User user, String newPassword) throws UserNotFoundException;
+	void updatePassword(User user, String newPassword);
 
 	void createNewUserAfterOAuthLoginSuccess(UserRegistrationDTO userDTO);
+
+	
 
 }

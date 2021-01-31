@@ -65,7 +65,10 @@
 				<div class="alert alert-dark" role="alert">You've been sent a
 					confirmation email</div>
 			</div>
-
+			<div th:if="${param.message}">
+				<div class="alert alert-dark" role="alert">You have
+					successfully changed your password.</div>
+			</div>
 
 
 			<form th:action="@{/register/new}" method="post" th:object="${user}">

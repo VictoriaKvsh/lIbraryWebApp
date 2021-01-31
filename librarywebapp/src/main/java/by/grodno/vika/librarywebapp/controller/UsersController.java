@@ -35,7 +35,7 @@ public class UsersController {
 	private StorageService imgService;
 	
 
-
+	
 	@GetMapping("/users")
 	public String getAllUsers(Model model) {
 

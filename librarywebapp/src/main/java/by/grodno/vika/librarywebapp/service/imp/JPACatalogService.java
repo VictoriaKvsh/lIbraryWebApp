@@ -7,6 +7,9 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import by.grodno.vika.librarywebapp.domain.Catalog;
@@ -28,9 +31,14 @@ public class JPACatalogService implements CatalogService {
 	ReadersBookRepo readersRepo;
 
 	@Override
-	public List<Catalog> getCatalog() {
-		return catalogRepo.findAll();
+	public Page<Catalog> getCatalog(int pageNum) {
+		int pageSize = 5;
+		Pageable pageable = PageRequest.of(pageNum, pageSize);
+	     
+	    return catalogRepo.findAll(pageable);
 	}
+		
+		
 
 	@Override
 	public Catalog addCatalog(Integer discriptionId, Catalog catalog) {

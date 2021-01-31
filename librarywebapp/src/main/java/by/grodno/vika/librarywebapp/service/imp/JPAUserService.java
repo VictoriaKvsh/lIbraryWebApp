@@ -26,7 +26,6 @@ import by.grodno.vika.librarywebapp.domain.UserRole;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
-import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.repo.UserCredentialsRepo;
 import by.grodno.vika.librarywebapp.repo.UserPictureRepo;
 import by.grodno.vika.librarywebapp.repo.UserRepo;
@@ -121,31 +120,31 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public void activateUser(Integer id) {
 		Optional<User> findById = userRepo.findById(id);
 
 		findById.map(user -> {
-			UserCredentials cred = user.getCredentials();
-			cred.setActive(true);
+		//	UserCredentials cred = user.getCredentials();
+		//	cred.setActive(true);
+			user.getCredentials().setActive(true);
 			user.setUserRequestToken(null);
-			credRepo.save(cred);
+	//		credRepo.save(cred);
+			
+			userRepo.save(user);
 			return user;
-		}).orElseThrow(() -> new UserNotFoundException());
+		}).orElseThrow(() -> new ResourceNotFoundException("There is no User registered with this email: " + findById.get().getEmail()));
 
 	}
 
 	@Override
-	public void updateUserRequestToken(String token, String email) throws UserNotFoundException {
+	public void updateUserRequestToken(String token, String email) {
 		User user = userRepo.findByEmail(email);
 		if (user != null) {
 			user.setUserRequestToken(token);
 			userRepo.save(user);
 		} else {
-			UserNotFoundException userNotFoundException = new UserNotFoundException();
-			userNotFoundException.setUserInfo(email);
-
-			throw userNotFoundException;
+			throw new ResourceNotFoundException("There is no User registered with this email: " + email);
 		}
 	}
 
@@ -155,7 +154,7 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public void updatePassword(User user, String newPassword) {
 		user.getCredentials().setPassword(passwordEncoder.encode(newPassword));
 		user.setUserRequestToken(null);

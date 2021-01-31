@@ -12,8 +12,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import by.grodno.vika.librarywebapp.domain.User;
-import by.grodno.vika.librarywebapp.domain.UserPicture;
-import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 import by.grodno.vika.librarywebapp.service.UserService;
 

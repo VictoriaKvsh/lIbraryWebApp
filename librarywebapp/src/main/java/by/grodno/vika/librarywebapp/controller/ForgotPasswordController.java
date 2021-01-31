@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import by.grodno.vika.librarywebapp.domain.User;
-import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.service.UserService;
 import net.bytebuddy.utility.RandomString;
 
@@ -46,9 +45,7 @@ public class ForgotPasswordController {
 	        sendEmail(email, resetPasswordLink);
 	        model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
 	         
-	    } catch (UserNotFoundException ex) {
-	        model.addAttribute("error", ex.getMessage());
-	    } catch (UnsupportedEncodingException | MessagingException e) {
+	    }catch (UnsupportedEncodingException | MessagingException e) {
 	        model.addAttribute("error", "Error while sending email");
     }
 	         

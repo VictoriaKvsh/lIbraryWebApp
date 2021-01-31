@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.domain.UserCredentials;
-import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.repo.UserRepo;
 
 import java.util.ArrayList;
