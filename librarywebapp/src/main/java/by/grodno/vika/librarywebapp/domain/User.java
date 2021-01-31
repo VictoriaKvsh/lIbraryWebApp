@@ -35,7 +35,7 @@ public class User {
 	@Length(min = 3, max = 20)
 	private String firstName;
 	
-	@Length(min = 3, max = 20)
+//	@Length(min = 3, max = 20)
 	private String lastName;
 
 	@Email
@@ -57,7 +57,7 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerUser")
 	private List<ReadersBook> readersBook;
 
-	private  AuthenticationProvider authProvader;
+	
 	
 	@Length(min=10,max=13)
 	private String phoneNumber;

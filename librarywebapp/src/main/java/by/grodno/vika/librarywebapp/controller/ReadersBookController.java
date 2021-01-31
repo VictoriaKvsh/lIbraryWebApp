@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import by.grodno.vika.librarywebapp.domain.ReadersBook;
+import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.repo.UserRepo;
 import by.grodno.vika.librarywebapp.security.CustomOAuth2User;
 import by.grodno.vika.librarywebapp.service.ReadersBookService;
+import by.grodno.vika.librarywebapp.service.UserService;
 
 @Controller
 public class ReadersBookController {
@@ -22,7 +24,7 @@ public class ReadersBookController {
 	@Autowired
 	ReadersBookService repo;
 	@Autowired
-	UserRepo uRepo;
+	UserService userService;
 
 	@GetMapping("/reader")
 	public String getReadersBook(Model model) {
@@ -33,18 +35,12 @@ public class ReadersBookController {
 
 	@PostMapping(path = "/reader/{catalogId}/add")
 	public String saveReadersBook(@PathVariable("catalogId") Integer discriptionId,
-			@AuthenticationPrincipal UserDetails currentUser, ReadersBook readersBook, Authentication authentication) {
-
-		Integer userId;
-		if (currentUser == null) {
-			OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-			String email = ((CustomOAuth2User) oauth2User).getEmail();
-			userId = (uRepo.findByEmail(email)).getId();
-		} else {
-
-			userId = uRepo.findByEmail(currentUser.getUsername()).getId();
-		}
-
+			ReadersBook readersBook, Authentication authentication) {
+		
+		
+		User user = userService.findByEmail(authentication.getName());
+		Integer userId = user.getId();
+		
 		repo.addReadersBook(discriptionId, userId, readersBook);
 
 		return "redirect:/catalog";

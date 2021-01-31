@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<th:block th:include="fragments/navBar.html :: navBar"></th:block>
+	<th:block th:include="fragments/navBar.html :: navBar"></th:block>
 	<div class="login-reg-panel">
 		<div class="login-info-box">
 			<h2>Have an account?</h2>
@@ -50,9 +50,9 @@
 				<a th:href="@{/oauth2/authorization/google}">Login with Google</a>
 
 			</div>
-			
+
 			<a th:href="@{/forgot_password}">Forgot password?</a>
-			
+
 			<div th:if="${param.error}">
 				<div class="alert alert-dark" role="alert">Invalid email
 					and/or password</div>
@@ -68,13 +68,13 @@
 
 
 
-			<form th:action="@{/register/new}" method="post">
+			<form th:action="@{/register/new}" method="post" th:object="${user}">
 				<div class="register-show">
 					<h2>REGISTER</h2>
 					<input type="text" name="email" placeholder="Email"> <input
 						type="password" name="password" placeholder="Password"> <input
-						type="firstname" name="firstName" placeholder="First name">
-					<input type="lastname" name="lastName" placeholder=" Last name">
+						type="firstname" name="firstName" placeholder="First name"><input
+						type="lastname" name="lastName" placeholder=" Last name">
 					<input type="submit" value="Register">
 				</div>
 			</form>

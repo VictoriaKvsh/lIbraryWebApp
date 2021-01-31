@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Catalog</title>
+<title>Books discriptions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <th:block th:include="fragments/navBar.html :: headerfiles">
 </th:block>
@@ -29,7 +29,7 @@
 <body>
 	<th:block th:include="fragments/navBar.html :: navBar"></th:block>
  <div class="container mt-7">
-<h2 class="mb-5">Catalog</h2>
+<h2 class="mb-5">Books discriptions</h2>
 	<div class="row">
 
 		<div class="col">
@@ -41,46 +41,44 @@
 								<th scope="col">Title</th>
 								<th scope="col">Autor</th>
 								<th scope="col">Year</th>
-								<th scope="col">Status</th>
-								<th scope="col">Order</th>
-								<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LIBRARIAN')">Reader's
-									name</th>
-								<th scope="col" sec:authorize="hasRole('ROLE_LIBRARIAN')">Delete</th>
+								<th scope="col">Add to Catalog</th>
+								<th scope="col">Edit</th>
+								<th scope="col">Delete</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="catalog : ${catalog}">
+							<tr th:each="book : ${books}">
 								<td><span class="mb-0 text-base"
-									th:text="${catalog.bookDiscription.autor}"></span></td>
+									th:text="${book.autor}"></span></td>
 								<td><span class="mb-0 text-base"
-									th:text="${catalog.bookDiscription.title}"></span></td>
+									th:text="${book.title}"></span></td>
 								<td><span class="mb-0 text-base"
-									th:text="${catalog.bookDiscription.year}"></span></td>
-								<td><span class="mb-0 text-base"
-									th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
-									th:text="|${catalog.status}  ${#dates.format(catalog.readersBook.dueDate, 'dd-MM')}|">
-								</span> <span class="mb-0 text-base"
-									th:unless="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
-									th:text="${catalog.status}"> </span></td>
-
-
-								<td sec:authorize="hasRole('ROLE_USER')">
+									th:text="${book.year}"></span></td>
+								
+								<td>
 									<form class="mb-0 text-base"
-										th:action="@{/reader/{catalogId}/add(catalogId=${catalog.id})}"
-										th:method="post"
-										th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).AVAILABLE}">
-										<input class="btn btn-secondary" type="submit" value="Order" />
+										th:action="@{/books_list/{bookId}/catalog(bookId=${book.id})}"
+										th:method="post">
+										<input class="btn btn-success" type="submit" value="Add" />
 									</form>
 								</td>
 
-								<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LIBRARIAN')" class="mb-0 text-base"> <a
-									th:href="@{users/profile/books(userId=${catalog?.readersBook?.ownerUser?.id})}"
-										th:text="${catalog?.readersBook?.ownerUser?.lastName}"></a></td>
-
-								<td sec:authorize="hasRole('ROLE_LIBRARIAN')">
+									<td>
 									<form class="mb-0 text-base"
-										th:action="@{/catalog/delete/{catalogId}(catalogId=${catalog.id})}"
-											th:method="post" th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).AVAILABLE}">
+										th:action="@{/books_list/edit/{bookId}(bookId=${book.id})}"
+										th:method="post">
+										<input class="btn btn-secondary" type="submit" value="Edit" />
+									</form>
+								</td>
+									<td>
+									<form class="mb-0 text-base"
+										th:action="@{/books_list/delete/{bookId}(bookId=${book.id})}"
+										th:method="post"
+										
+										th:each="catalog : ${book.catalog}" 
+										th:if="${catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).AVAILABLE}"
+										
+										>
 										<input class="btn btn-danger" type="submit" value="Delete" />
 									</form>
 								</td>

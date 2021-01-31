@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import by.grodno.vika.librarywebapp.domain.User;
@@ -38,7 +39,7 @@ public class RegistrationController {
 	}
 	
 	@PostMapping("/register/new")
-	String registerPage(@Valid UserRegistrationDTO user, BindingResult bindingResult, Model model) {
+	String registerPage(@Valid @ModelAttribute ("user") UserRegistrationDTO user, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("userRegistrationDTO", user);

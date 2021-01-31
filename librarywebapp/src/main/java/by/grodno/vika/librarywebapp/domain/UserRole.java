@@ -2,6 +2,6 @@ package by.grodno.vika.librarywebapp.domain;
 
 public enum UserRole {
 	
-	READER, LIBRARIAN, ADMIN
+	USER, LIBRARIAN, ADMIN
 
 }

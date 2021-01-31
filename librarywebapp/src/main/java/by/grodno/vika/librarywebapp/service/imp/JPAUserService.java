@@ -20,12 +20,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import by.grodno.vika.librarywebapp.domain.AuthenticationProvider;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.domain.UserCredentials;
 import by.grodno.vika.librarywebapp.domain.UserPicture;
 import by.grodno.vika.librarywebapp.domain.UserRole;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
+import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 import by.grodno.vika.librarywebapp.repo.UserCredentialsRepo;
@@ -165,24 +165,15 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	public void createNewUserAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider) {
+	public void createNewUserAfterOAuthLoginSuccess(UserRegistrationDTO userDTO) {
 
 		User user = new User();
-		user.setEmail(email);
-		user.setLastName(name);
-		user.setRole(UserRole.READER);
-		user.setAuthProvader(provider);
+		user.setEmail(userDTO.getEmail());
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+		user.setRole(UserRole.USER);
 		UserCredentials creds = new UserCredentials(null, new Date(), true, null);
 		user.setCredentials(creds);
-
-		userRepo.save(user);
-	}
-
-	@Override
-	public void updateUserAfterOAuthLoginSuccess(User user, String name, AuthenticationProvider provider) {
-
-		user.setLastName(name);
-		user.setAuthProvader(provider);
 
 		userRepo.save(user);
 	}

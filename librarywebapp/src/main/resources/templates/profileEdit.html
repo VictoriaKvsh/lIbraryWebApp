@@ -66,9 +66,10 @@
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">First Name:</span><span
 										class="about-item-detail text-base"> <input
-											class="form-control" type="text" th:field="*{firstName}" /><span
+											class="form-control" type="text" th:field="*{firstName}" />
+											<div 
 											th:if="${#fields.hasErrors('firstName')}"
-											th:errors="*{firstName}">Full name error</span></span></li>
+											th:errors="*{firstName}">Full name error</div></span></li>
 									<li class="about-items"><i
 										class="mdi mdi-account icon-sm "></i><span
 										class="about-item-name">Last Name:</span><span

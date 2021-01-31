@@ -21,20 +21,23 @@ public class CustomOAuth2User implements OAuth2User{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		oauth2User.getAuthorities();
 		return oauth2User.getAuthorities();
 	}
 
 	@Override
 	public String getName() {
-		return oauth2User.getAttribute("name");
-	}
-	public String getFullName() {
-		return oauth2User.getAttribute("name");
-		
-	}
-	public String getEmail() {
 		return oauth2User.getAttribute("email");
+	}
+	public String getFirstName() {
+		return oauth2User.getAttribute("given_name");
 		
 	}
-
+	
+	public String getLastName() {
+		return oauth2User.getAttribute("family_name");
+		
+	}
+	
+		
 }

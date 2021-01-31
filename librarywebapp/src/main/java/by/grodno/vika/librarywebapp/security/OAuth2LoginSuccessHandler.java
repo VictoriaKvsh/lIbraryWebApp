@@ -11,8 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import by.grodno.vika.librarywebapp.domain.AuthenticationProvider;
 import by.grodno.vika.librarywebapp.domain.User;
+import by.grodno.vika.librarywebapp.domain.UserPicture;
+import by.grodno.vika.librarywebapp.dto.UserDTO;
+import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 import by.grodno.vika.librarywebapp.service.UserService;
 
 @Component
@@ -24,16 +26,22 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		
-		CustomOAuth2User oauth2User = (CustomOAuth2User) authentication.getPrincipal();
-		String email = oauth2User.getEmail();
-		User user = userService.findByEmail(email);
-		String name = oauth2User.getName();
-		if (user == null) {
-			userService.createNewUserAfterOAuthLoginSuccess(email, name, AuthenticationProvider.GOOGLE);
-		} else {
-			userService.updateUserAfterOAuthLoginSuccess(user, name, AuthenticationProvider.GOOGLE);
 
+		CustomOAuth2User oauth2User = (CustomOAuth2User) authentication.getPrincipal();
+		String email = oauth2User.getName();
+		User user = userService.findByEmail(email);
+
+		UserRegistrationDTO userDTO = new UserRegistrationDTO();
+		userDTO.setFirstName(oauth2User.getFirstName());
+		userDTO.setLastName(oauth2User.getLastName());
+		userDTO.setEmail(oauth2User.getName());
+
+		if (user == null) {
+			userService.createNewUserAfterOAuthLoginSuccess(userDTO);
+		} else {
+			user.setFirstName(oauth2User.getFirstName());
+			user.setLastName(oauth2User.getLastName());
+			userService.saveUser(user);
 		}
 
 		super.onAuthenticationSuccess(request, response, authentication);

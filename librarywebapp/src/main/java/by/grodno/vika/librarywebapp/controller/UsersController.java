@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,18 +32,14 @@ import by.grodno.vika.librarywebapp.service.StorageService;
 import by.grodno.vika.librarywebapp.service.UserService;
 
 @Controller
-//@RequestMapping("/users")
 public class UsersController {
 
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private StorageService imgService;
-	@Autowired
-	private ConversionService convertionService;
-	@Autowired
-	UserRepo uRepo;
+	
+
 
 	@GetMapping("/users")
 	public String getAllUsers(Model model) {
@@ -55,31 +52,25 @@ public class UsersController {
 
 	@GetMapping("/users/profile/info")
 	public String getUserById(@RequestParam(value = "userId", required = false) Integer userId, Model model,
-			@AuthenticationPrincipal UserDetails currentUser, Authentication authentication) {
+			Authentication authentication) {
 		if (userId == null) {
-			userId = uRepo.findByEmail(currentUser.getUsername()).getId();
-		}
-		if (userId == null) {
-			CustomOAuth2User oauth2User = (CustomOAuth2User) authentication.getPrincipal();
-			String email = oauth2User.getEmail();
-			User user = uRepo.findByEmail(email);
-			userId = user.getId();
-		}
-
+			userId = userService.findByEmail(authentication.getName()).getId();
+			}
 		User user = userService.getUser(userId);
+		
 		model.addAttribute("user", user);
 		return "profile";
 	}
 
 	@GetMapping("/users/profile/books")
 	public String getUsersBooks(@RequestParam(value = "userId", required = false) Integer userId, Model model,
-			@AuthenticationPrincipal UserDetails currentUser) {
+			Authentication authentication) {
 		if (userId == null) {
-			userId = uRepo.findByEmail(currentUser.getUsername()).getId();
+			userId = userService.findByEmail(authentication.getName()).getId();
 		}
 
 		User user = userService.getUser(userId);
-		List<ReadersBook> books = uRepo.findByEmail(currentUser.getUsername()).getReadersBook();
+		List<ReadersBook> books = user.getReadersBook();
 
 		model.addAttribute("user", user);
 		model.addAttribute("books", books);
@@ -88,22 +79,24 @@ public class UsersController {
 
 	@GetMapping("/users/profile/edit")
 
-	public String editUserForm(@AuthenticationPrincipal UserDetails principal, Model model) {
-		model.addAttribute("user", userService.getUser(uRepo.findByEmail(principal.getUsername()).getId()));
+	public String editUserForm(Authentication authentication, Model model) {
+		User user = userService.getUser(userService.findByEmail(authentication.getName()).getId());
+		
+		model.addAttribute("user", user);
 		return "profileEdit";
 	}
 
 	@PostMapping("/users/profile/edit")
-	public String updateUser(@Valid UserDTO userDTO, @RequestParam(value = "file", required = false) MultipartFile file,
-			BindingResult bindingResult, Model model, @AuthenticationPrincipal UserDetails principal)
+	public String updateUser(@Valid @ModelAttribute("user") UserDTO user, BindingResult bindingResult,  @RequestParam(value = "file", required = false) MultipartFile file,
+			 Model model, Authentication authentication)
 			throws IOException {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("userDTO", userDTO);
+			model.addAttribute("user", user);
 			return "profileEdit";
 		}
-		Integer id = uRepo.findByEmail(principal.getUsername()).getId();
-		userDTO.setId(id);
-		userService.updateUser(userDTO, file);
+		Integer id = userService.findByEmail(authentication.getName()).getId();
+		user.setId(id);
+		userService.updateUser(user, file);
 
 		return "redirect:/users/profile/info";
 	}
@@ -130,11 +123,5 @@ public class UsersController {
 		}
 	}
 
-//	@GetMapping("/apis/v1/users")
-//	@ResponseBody
-//	public List<UserDTO> getAllUsers() {
-//		return userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
-//				.collect(Collectors.toList());
-//	}
 
 }

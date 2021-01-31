@@ -34,7 +34,7 @@ public class UserAuthService implements UserDetailsService {
 		}
 	}
 
-	private Collection<? extends GrantedAuthority> toAuthorities(User findByUserName) {
+	public Collection<? extends GrantedAuthority> toAuthorities(User findByUserName) {
 		return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + findByUserName.getRole().name()));
 	}
 

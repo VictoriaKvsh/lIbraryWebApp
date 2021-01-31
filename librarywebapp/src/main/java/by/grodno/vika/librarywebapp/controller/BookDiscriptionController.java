@@ -40,8 +40,8 @@ public class BookDiscriptionController {
 	@GetMapping("/books_list")
 	public String getAllBooks(Model model) {
 		model.addAttribute("books", repo.getBooks());
-		model.addAttribute("byAutor", Comparator.comparing(BookDiscription :: getAutor));
-		return "bookInfo";
+	//	model.addAttribute("byAutor", Comparator.comparing(BookDiscription :: getAutor));
+		return "booksCatalogDiscr";
 	}
 	
 	@PostMapping(path = "/books_list/{bookId}/catalog")
@@ -51,15 +51,17 @@ public class BookDiscriptionController {
 		return "redirect:/books_list";
 	}	
 
-	@PutMapping("/books_list/{bookId}")
-	public BookDiscription updateBookDiscr(@PathVariable Integer bookId,
+	@PostMapping("/books_list/edit/{bookId}")
+	public String updateBookDiscr(@PathVariable Integer bookId,
 			@Valid @RequestBody BookDiscription bookRequest) {
-		return repo.updateBook(bookId, bookRequest);
+		repo.updateBook(bookId, bookRequest);
+		return "";
 	}
 
-	@DeleteMapping("/books/{bookId}")
-	public void deleteBookDiscr(@PathVariable Integer bookId) {
+	@PostMapping("/books_list/delete/{bookId}")
+	public String deleteBookDiscr(@PathVariable Integer bookId) {
 		repo.deleteBook(bookId);
+		return "redirect:/books_list";
 	}
 
 	@GetMapping("/books_list/page")

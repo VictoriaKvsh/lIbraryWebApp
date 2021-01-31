@@ -52,11 +52,21 @@
 
 								<ul class="profile-info-list">
 
-									<a href="info" class="profile-info-list-item"><i
-										class="mdi mdi-account"></i>Profile</a>
+									<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LIBRARIAN')"
+										th:href="@{info(userId=${user.id})}"
+										class="profile-info-list-item"><i class="mdi mdi-account"></i>User
+										Profile</a>
+									<a sec:authorize="hasRole('ROLE_USER')" href="info"
+										class="profile-info-list-item"><i class="mdi mdi-account"></i>Profile</a>
 
-									<a href="books" class="profile-info-list-item"><i
+									<a sec:authorize="hasRole('ROLE_USER')" href="books"
+										class="profile-info-list-item"><i
 										class="mdi mdi-bookmark-check"></i>Books</a>
+
+									<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LIBRARIAN')"
+										th:href="@{books(userId=${user.id})}"
+										class="profile-info-list-item"><i class="mdi mdi-account"></i>Users
+										Books</a>
 								</ul>
 							</div>
 						</div>
@@ -69,7 +79,7 @@
 							<p class="card-title font-weight-bold">About</p>
 							<hr>
 							<p class="card-description">
-								User Information <a href="edit" class="about-item-edit">Edit</a>
+								User Information <a sec:authorize="hasRole('ROLE_USER')" href="edit" class="about-item-edit">Edit</a>
 							</p>
 							<ul class="about">
 								<li class="about-items"><i class="mdi mdi-account icon-sm "></i><span

@@ -2,6 +2,7 @@ package by.grodno.vika.librarywebapp.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class BookDiscription {
 		
 	private Integer year;
 	
-	@OneToMany(mappedBy = "bookDiscription")
+	@OneToMany(mappedBy = "bookDiscription", cascade = CascadeType.ALL)
     private List<Catalog> catalog;
 	
 	

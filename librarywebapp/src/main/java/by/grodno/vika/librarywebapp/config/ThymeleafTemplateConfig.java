@@ -2,6 +2,8 @@ package by.grodno.vika.librarywebapp.config;
 
 import java.nio.charset.StandardCharsets;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -10,23 +12,16 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 
 @Configuration
-public class ThymeleafTemplateConfig {
+public class ThymeleafTemplateConfig implements InitializingBean {
 	
-	// In order to process our templates, we will configure a SpringTemplateEngine
-	// which specially configured for email processing, in our Spring boot email
-	// template configuration.
-	@Bean
-    public SpringTemplateEngine springTemplateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.addTemplateResolver(htmlTemplateResolver());
-        return templateEngine;
-    }
-
+	@Autowired
+	SpringTemplateEngine t;
+	
 	// We need to tell Thymeleaf where the email templates are located. We do this
 	// by creating and configuring the ClassLoaderTemplateResolver We can set a
 	// prefix and suffix to configure where thymeleaf will search for the HTML email
 	// templates.
-	@Bean
+	
     public ClassLoaderTemplateResolver htmlTemplateResolver(){
         ClassLoaderTemplateResolver emailTemplateResolver = new ClassLoaderTemplateResolver();
         emailTemplateResolver.setPrefix("/templates/");
@@ -35,6 +30,12 @@ public class ThymeleafTemplateConfig {
         emailTemplateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
         return emailTemplateResolver;
     }
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		t.addTemplateResolver(htmlTemplateResolver());
+		
+	}
 	
 	
 	

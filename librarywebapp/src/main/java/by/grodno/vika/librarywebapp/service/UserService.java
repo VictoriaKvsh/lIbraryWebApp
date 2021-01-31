@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import by.grodno.vika.librarywebapp.domain.AuthenticationProvider;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
+import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 import by.grodno.vika.librarywebapp.exception.UserNotFoundException;
 
 public interface UserService {
@@ -35,8 +35,6 @@ public interface UserService {
 
 	void updatePassword(User user, String newPassword) throws UserNotFoundException;
 
-	void createNewUserAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider);
-
-	void updateUserAfterOAuthLoginSuccess(User user, String name, AuthenticationProvider provider);
+	void createNewUserAfterOAuthLoginSuccess(UserRegistrationDTO userDTO);
 
 }

@@ -32,7 +32,7 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<th:block th:include="fragments/navBar.html :: navBar"></th:block>
+	<th:block th:include="fragments/navBar.html :: navBar"></th:block>
 	<div class="main-panel">
 		<div class="c0ontainer">
 
@@ -45,9 +45,7 @@
 
 
 								<div class="user-image">
-									<img
-										th:src="@{/users/{uid}/img(uid=${user.id})}"
-										class="img ">
+									<img th:src="@{/users/{uid}/img(uid=${user.id})}" class="img ">
 								</div>
 							</div>
 
@@ -58,17 +56,22 @@
 
 								<ul class="profile-info-list">
 
-									<a sec:authorize="hasRole('ROLE_ADMIN')"
+									<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LIBRARIAN')"
 										th:href="@{info(userId=${user.id})}"
-										class="profile-info-list-item"><i class="mdi mdi-account"></i>User Profile</a>
-
-									<a sec:authorize="hasRole('ROLE_READER')" href="info"
+										class="profile-info-list-item"><i class="mdi mdi-account"></i>User
+										Profile</a>
+									<a sec:authorize="hasRole('ROLE_USER')" href="info"
 										class="profile-info-list-item"><i class="mdi mdi-account"></i>Profile</a>
 
-									<a href="books" class="profile-info-list-item"><i
+									<a sec:authorize="hasRole('ROLE_USER')" href="books"
+										class="profile-info-list-item"><i
 										class="mdi mdi-bookmark-check"></i>Books</a>
 
-									
+									<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LIBRARIAN')"
+										th:href="@{books(userId=${user.id})}"
+										class="profile-info-list-item"><i class="mdi mdi-account"></i>Users
+										Books</a>
+
 
 
 								</ul>
@@ -119,7 +122,7 @@
 															th:unless="${book.catalog.status == T(by.grodno.vika.librarywebapp.domain.Status).DUE_TO}"
 															th:text="${book.catalog.status}"> </span></td>
 														<td><span class="mb-0 text-base"
-															th:text=" ${#dates.format(book.date, 'dd-MM')}" ></span></td>
+															th:text=" ${#dates.format(book.date, 'dd-MM')}"></span></td>
 														<td sec:authorize="hasRole('ROLE_ADMIN')">
 															<form
 																th:action="@{/catalog/{catalogId}/status_update(catalogId=${book.catalog.id})}"
@@ -127,8 +130,10 @@
 																<select class="mb-0 text-sm" name="status">
 																	<option class="mb-0 text-sm"
 																		th:each="statusOpt : ${T(by.grodno.vika.librarywebapp.domain.Status).values()}"
-																		th:value="${statusOpt}" th:text="${statusOpt}" th:if="${statusOpt != book.catalog.status}"></option>
-																</select> <input class="btn btn-light" type="submit" value="Submit" />
+																		th:value="${statusOpt}" th:text="${statusOpt}"
+																		th:if="${statusOpt != book.catalog.status}"></option>
+																</select> <input class="btn btn-light" type="submit"
+																	value="Submit" />
 															</form>
 														</td>
 													</tr>
