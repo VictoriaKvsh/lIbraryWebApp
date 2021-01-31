@@ -42,7 +42,7 @@
 								<th scope="col">Autor</th>
 								<th scope="col">Year</th>
 								<th scope="col">Status</th>
-								<th scope="col">Order</th>
+								<th scope="col" sec:authorize="hasRole('ROLE_USER')">Order</th>
 								<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LIBRARIAN')">Reader's
 									name</th>
 								<th scope="col" sec:authorize="hasRole('ROLE_LIBRARIAN')">Delete</th>

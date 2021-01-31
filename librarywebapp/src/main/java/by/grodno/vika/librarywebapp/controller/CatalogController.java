@@ -2,6 +2,8 @@ package by.grodno.vika.librarywebapp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +33,10 @@ public class CatalogController {
 	
 	
 	@PostMapping("/catalog/{catalogId}/status_update")
-	public String updateStatus(@PathVariable ("catalogId") Integer catalogId, Status status) {
+	public String updateStatus(@PathVariable ("catalogId") Integer catalogId, Status status, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
 		repo.updateCatalogStatus(status, catalogId);
-		return "redirect:/catalog";
+		return "redirect:" + referer;
 	}
 	
 	@PostMapping("/catalog/delete/{catalogId}")

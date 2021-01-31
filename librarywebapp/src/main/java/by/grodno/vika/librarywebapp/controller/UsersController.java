@@ -8,10 +8,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,8 +23,6 @@ import by.grodno.vika.librarywebapp.domain.ReadersBook;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.Avatar;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
-import by.grodno.vika.librarywebapp.repo.UserRepo;
-import by.grodno.vika.librarywebapp.security.CustomOAuth2User;
 import by.grodno.vika.librarywebapp.service.StorageService;
 import by.grodno.vika.librarywebapp.service.UserService;
 
