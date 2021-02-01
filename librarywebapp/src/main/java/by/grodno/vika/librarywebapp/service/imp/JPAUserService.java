@@ -14,6 +14,10 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,8 +50,10 @@ public class JPAUserService implements UserService {
 	private PasswordEncoder passwordEncoder;
 
 	@Override
-	public List<User> getUsers() {
-		return userRepo.findAll();
+	public Page<User> getUsers(int pageNum, String sortField) {
+		int pageSize = 8;
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize, Sort.by(sortField).ascending());
+		return userRepo.findAll(pageable);
 	}
 
 	@Transactional
@@ -85,7 +91,7 @@ public class JPAUserService implements UserService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			pictureRepo.save(picture);
 		}
 
@@ -125,15 +131,16 @@ public class JPAUserService implements UserService {
 		Optional<User> findById = userRepo.findById(id);
 
 		findById.map(user -> {
-		//	UserCredentials cred = user.getCredentials();
-		//	cred.setActive(true);
+			// UserCredentials cred = user.getCredentials();
+			// cred.setActive(true);
 			user.getCredentials().setActive(true);
 			user.setUserRequestToken(null);
-	//		credRepo.save(cred);
-			
+			// credRepo.save(cred);
+
 			userRepo.save(user);
 			return user;
-		}).orElseThrow(() -> new ResourceNotFoundException("There is no User registered with this email: " + findById.get().getEmail()));
+		}).orElseThrow(() -> new ResourceNotFoundException(
+				"There is no User registered with this email: " + findById.get().getEmail()));
 
 	}
 

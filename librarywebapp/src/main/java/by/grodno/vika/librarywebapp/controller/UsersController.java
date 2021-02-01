@@ -8,6 +8,9 @@ import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,14 +39,32 @@ public class UsersController {
 	
 
 	
-	@GetMapping("/users")
-	public String getAllUsers(Model model) {
-
-		List<User> users = userService.getUsers();
-		model.addAttribute("users", users);
-
-		return "usersList";
+	@GetMapping("/users/{pageNum}")
+	public String getAllUsers(Model model,
+			@PathVariable(name = "pageNum") int pageNum,
+			@RequestParam(required = false, name = "sortField") String sortField) {
+		if (sortField == null) {
+			sortField = "lastName";
+		}
+	    Page<User> page = userService.getUsers(pageNum, sortField);
+	     
+	    List<User> users = page.getContent();
+	     
+	    model.addAttribute("currentPage", pageNum);
+	    model.addAttribute("totalPages", page.getTotalPages());
+	    model.addAttribute("sortField", sortField);
+	
+	    model.addAttribute("users", users);
+	     
+	    return "usersList";
 	}
+	
+	     
+	  
+	   
+	
+	
+	
 
 	@GetMapping("/users/profile/info")
 	public String getUserById(@RequestParam(value = "userId", required = false) Integer userId, Model model,

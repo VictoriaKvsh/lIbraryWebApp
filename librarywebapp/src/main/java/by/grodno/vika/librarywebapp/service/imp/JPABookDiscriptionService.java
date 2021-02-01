@@ -7,6 +7,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,10 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 	BookDiscriptionRepo repo;
 
 	@Override
-	public List<BookDiscription> getBooks() {
-		return repo.findAll();
+	public Page<BookDiscription> getBooks(int pageNum, String sortField) {
+		int pageSize = 8;
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize, Sort.by(sortField).ascending());
+		return repo.findAll(pageable);
 	}
 
 	@Override

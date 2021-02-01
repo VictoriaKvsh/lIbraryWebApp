@@ -3,13 +3,14 @@ package by.grodno.vika.librarywebapp.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort.Direction;
 
 import by.grodno.vika.librarywebapp.domain.BookDiscription;
 
 public interface BookDiscriptionService {
 
-	List<BookDiscription> getBooks();
-
+	Page<BookDiscription> getBooks(int pageNum, String sortField);
+	
 	void addBook(BookDiscription book);
 	
 	BookDiscription updateBook (Integer number, BookDiscription book);
@@ -19,6 +20,8 @@ public interface BookDiscriptionService {
 	Page<BookDiscription> getPage(Integer pageNum, Integer pageSize);
 
 	List<BookDiscription> findByExample(BookDiscription autor);
+
+	
 
 
 }
