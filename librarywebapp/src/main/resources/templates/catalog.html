@@ -30,6 +30,16 @@
 	<th:block th:include="fragments/navBar.html :: navBar"></th:block>
 	<div class="container mt-7">
 		<h2 class="mb-5">Catalog</h2>
+		
+		<div class="input-group mb-3">
+			<input type="text" class="form-control"
+				placeholder="Recipient's username" aria-label="Recipient's username"
+				aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Search</span>
+			</div>
+		</div>
+		
 		<div class="row">
 
 			<div class="col">
@@ -39,8 +49,10 @@
 							<thead class="thead-light">
 								<tr>
 
-									<th scope="col"><a th:href="@{'/catalog/' + ${currentPage} + '?sortField=bookDiscription.autor'}">Autor</a></th>
-									<th scope="col"><a th:href="@{'/catalog/' + ${currentPage} + '?sortField=bookDiscription.title'}">Title</a></th>
+									<th scope="col"><a
+										th:href="@{'/catalog/' + ${currentPage} + '?sortField=bookDiscription.autor'}">Autor</a></th>
+									<th scope="col"><a
+										th:href="@{'/catalog/' + ${currentPage} + '?sortField=bookDiscription.title'}">Title</a></th>
 									<th scope="col">Year</th>
 									<th scope="col">Status</th>
 									<th scope="col" sec:authorize="hasRole('ROLE_USER')">Order</th>
@@ -102,10 +114,12 @@
 
 
 
-								<span th:each="i: ${#numbers.sequence(1, totalPages)}"> <li class="page-item"><a class="page-link" 
-									th:if="${currentPage != i}" th:href="@{'/catalog/' + ${i}} +'?sortField=' + ${sortField}">[[${i}]]</a></li>
-									<li class="page-item active"><span class="page-link" th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
-								</li></span>
+								<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+									<li class="page-item"><a class="page-link"
+										th:if="${currentPage != i}" th:href="@{'/catalog/' + ${i}}">[[${i}]]</a></li>
+									<li class="page-item active"><span class="page-link"
+										th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;</li>
+								</span>
 
 
 

@@ -30,6 +30,17 @@
 	<th:block th:include="fragments/navBar.html :: navBar"></th:block>
 	<div class="container mt-7">
 		<h2 class="mb-5">Books discriptions</h2>
+
+
+		<form th:action="@{/books_list/1/search}">
+    Filter: <input type="text" name="autor"  th:value="${autor}"  />
+    &nbsp;
+    <input type="submit" value="Search" />
+    
+</form>
+
+
+
 		<div class="row">
 
 			<div class="col">
@@ -38,8 +49,10 @@
 						<table class="table align-items-center table-flush">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col"><a th:href="@{'/books_list/' + ${currentPage} + '?sortField=title'}">Title</th>
-									<th scope="col"><a th:href="@{'/books_list/' + ${currentPage} + '?sortField=autor'}">Autor</th>
+									<th scope="col"><a
+										th:href="@{'/books_list/' + ${currentPage} + '?sortField=title'}">Title</th>
+									<th scope="col"><a
+										th:href="@{'/books_list/' + ${currentPage} + '?sortField=autor'}">Autor</th>
 									<th scope="col">Year</th>
 									<th scope="col">Add to Catalog</th>
 									<th scope="col">Edit</th>
@@ -70,11 +83,7 @@
 									<td>
 										<form class="mb-0 text-base"
 											th:action="@{/books_list/delete/{bookId}(bookId=${book.id})}"
-											th:method="post" 
-											
-											>
-											
-											
+											th:method="post">
 											<input class="btn btn-danger" type="submit" value="Delete" />
 										</form>
 									</td>
@@ -88,11 +97,14 @@
 					<div class="card-footer py-4">
 						<nav aria-label="...">
 							<ul class="pagination justify-content-end mb-0">
-								
-								<span th:each="i: ${#numbers.sequence(1, totalPages)}"> <li class="page-item"><a class="page-link" 
-									th:if="${currentPage != i}" th:href="@{'/books_list/' + ${i}} +'?sortField=' + ${sortField}">[[${i}]]</a></li>
-									<li class="page-item active"><span class="page-link" th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
-								</li></span>
+
+								<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+									<li class="page-item"><a class="page-link"
+										th:if="${currentPage != i}"
+										th:href="@{'/books_list/' + ${i}} +'?sortField=' + ${sortField}">[[${i}]]</a></li>
+									<li class="page-item active"><span class="page-link"
+										th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;</li>
+								</span>
 
 							</ul>
 						</nav>

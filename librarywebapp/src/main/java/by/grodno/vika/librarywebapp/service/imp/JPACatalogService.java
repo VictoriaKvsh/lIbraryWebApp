@@ -2,14 +2,13 @@ package by.grodno.vika.librarywebapp.service.imp;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import by.grodno.vika.librarywebapp.domain.Catalog;
@@ -31,14 +30,23 @@ public class JPACatalogService implements CatalogService {
 	ReadersBookRepo readersRepo;
 
 	@Override
-	public Page<Catalog> getCatalog(int pageNum) {
-		int pageSize = 5;
-		Pageable pageable = PageRequest.of(pageNum, pageSize);
-	     
-	    return catalogRepo.findAll(pageable);
+	
+	public Page<Catalog> getCatalog (Integer pageNum, String sortField) {
+		Pageable pagable;
+		int pageSize = 8;
+		if (sortField == null) {
+			pagable = PageRequest.of(pageNum - 1, pageSize, Sort.by("bookDiscription.autor").ascending());
+		} else {
+			pagable = PageRequest.of(pageNum - 1, pageSize, Sort.by(sortField).ascending());
+		
+			
+		}
+
+		return catalogRepo.findAll(pagable);
 	}
-		
-		
+
+
+	
 
 	@Override
 	public Catalog addCatalog(Integer discriptionId, Catalog catalog) {

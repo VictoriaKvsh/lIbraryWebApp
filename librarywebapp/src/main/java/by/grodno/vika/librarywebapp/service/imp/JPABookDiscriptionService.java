@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import by.grodno.vika.librarywebapp.domain.BookDiscription;
 import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
@@ -25,6 +26,9 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 	@Override
 	public Page<BookDiscription> getBooks(int pageNum, String sortField) {
 		int pageSize = 8;
+			if (sortField == null) {
+				sortField = "autor";
+			}
 		Pageable pageable = PageRequest.of(pageNum - 1, pageSize, Sort.by(sortField).ascending());
 		return repo.findAll(pageable);
 	}

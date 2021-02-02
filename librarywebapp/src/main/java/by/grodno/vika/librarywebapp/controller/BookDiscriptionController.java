@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,29 +26,27 @@ import by.grodno.vika.librarywebapp.service.CatalogService;
 public class BookDiscriptionController {
 
 	@Autowired
-	BookDiscriptionService repo;
+	BookDiscriptionService bookService;
 
 	@Autowired
-	CatalogService catalogRepo;
+	CatalogService catalogService;
 
 	@PostMapping(path = "/books_list/new")
 	public String saveBook(BookDiscription bookDiscription) {
-		repo.addBook(bookDiscription);
+		bookService.addBook(bookDiscription);
 		return "redirect:/books";
 	}
 
 	@GetMapping("/books_list/{pageNum}")
 	public String getAllBooks(Model model, @PathVariable(name = "pageNum") int pageNum,
 			@RequestParam(required = false, name = "sortField") String sortField) {
-		if (sortField == null) {
-			sortField = "autor";
-		}
-		Page<BookDiscription> page = repo.getBooks(pageNum, sortField);
+		
+		Page<BookDiscription> page = bookService.getBooks(pageNum, sortField);
 
 		List<BookDiscription> books = page.getContent();
-
-		model.addAttribute("currentPage", pageNum);
+		
 		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("books", books);
 
@@ -56,28 +55,35 @@ public class BookDiscriptionController {
 
 	@PostMapping(path = "/books_list/{bookId}/catalog")
 	public String saveCatalog(@PathVariable("bookId") Integer discriptionId, Catalog catalog) {
-		catalogRepo.addCatalog(discriptionId, catalog);
+		catalogService.addCatalog(discriptionId, catalog);
 
 		return "redirect:/books_list";
 	}
 
 	@PostMapping("/books_list/edit/{bookId}")
 	public String updateBookDiscr(@PathVariable Integer bookId, @Valid @RequestBody BookDiscription bookRequest) {
-		repo.updateBook(bookId, bookRequest);
+		bookService.updateBook(bookId, bookRequest);
 		return "";
 	}
 
 	@PostMapping("/books_list/delete/{bookId}")
 	public String deleteBookDiscr(@PathVariable Integer bookId) {
-		repo.deleteBook(bookId);
+		bookService.deleteBook(bookId);
 		return "redirect:/books_list";
 	}
 
-	@GetMapping("/books_list/search")
-	public List<BookDiscription> findByExample(@RequestParam(value = "autor", required = false) String autor,
-			@RequestParam(value = "title", required = false) String title) {
-		BookDiscription bookDiscription = new BookDiscription(null, autor, title, null, null);
-		return repo.findByExample(bookDiscription);
+	@GetMapping("/books_list/1/search")
+	public String findByExample(Model model, @Param(value = "autor") String autor) {
+		
+		BookDiscription bookDiscription = new BookDiscription(null, autor, null, null, null);
+		
+		List<BookDiscription> books = bookService.findByExample(bookDiscription);
+
+		model.addAttribute("currentPage", 1);
+		model.addAttribute("totalPages", 1);
+		model.addAttribute("books", books);
+
+		return "booksCatalogDiscr";
 	}
 
 }
