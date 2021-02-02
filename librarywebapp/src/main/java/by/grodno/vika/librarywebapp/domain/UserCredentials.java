@@ -29,7 +29,7 @@ public class UserCredentials {
 
 	private Boolean active;
 
-	@Length(min = 5, max = 20)
+	@Length(min = 5)
 	private String password;
 	
 }
