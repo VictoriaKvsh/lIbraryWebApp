@@ -47,11 +47,12 @@
 						type="password" name="password" placeholder="Password"> <input
 						type="submit" value="Login">
 				</form>
-				<a th:href="@{/oauth2/authorization/google}">Login with Google</a>
+				<a th:href="@{/oauth2/authorization/google}">Login with GOOGLE</a><p>
+				<a th:href="@{/oauth2/authorization/facebook}">Login with FACEBOOK</a>
 
 			</div>
 
-			<a th:href="@{/forgot_password}">Forgot password?</a>
+			<a class=anew th:href="@{/forgot_password}">Forgot password?</a>
 
 			<div th:if="${param.error}">
 				<div class="alert alert-dark" role="alert">Invalid email

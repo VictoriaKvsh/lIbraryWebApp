@@ -58,13 +58,6 @@ public class UsersController {
 	     
 	    return "usersList";
 	}
-	
-	     
-	  
-	   
-	
-	
-	
 
 	@GetMapping("/users/profile/info")
 	public String getUserById(@RequestParam(value = "userId", required = false) Integer userId, Model model,

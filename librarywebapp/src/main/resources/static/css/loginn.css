@@ -150,5 +150,9 @@ a{
 }
 a{
   text-decoration:none;
-  color:#ff2626;
+  color:#0000ff;
 }
+.anew{
+	color:#ff0000  !important;
+}
+

@@ -34,6 +34,13 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 		userDTO.setLastName(oauth2User.getLastName());
 		userDTO.setEmail(oauth2User.getName());
 
+		if (oauth2User.getLastName() == null) {
+			String str = oauth2User.getFullName();
+			String[] words = str.split(" ");
+			userDTO.setFirstName(words[0]);
+			userDTO.setLastName(words[1]);
+		}
+
 		if (user == null) {
 			userService.createNewUserAfterOAuthLoginSuccess(userDTO);
 		} else {
