@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import by.grodno.vika.librarywebapp.domain.User;
+import by.grodno.vika.librarywebapp.domain.UserPicture;
 import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 import by.grodno.vika.librarywebapp.service.UserService;
 
@@ -29,23 +30,20 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 		String email = oauth2User.getName();
 		User user = userService.findByEmail(email);
 
-		UserRegistrationDTO userDTO = new UserRegistrationDTO();
-		userDTO.setFirstName(oauth2User.getFirstName());
-		userDTO.setLastName(oauth2User.getLastName());
-		userDTO.setEmail(oauth2User.getName());
-
-		if (oauth2User.getLastName() == null) {
-			String str = oauth2User.getFullName();
-			String[] words = str.split(" ");
-			userDTO.setFirstName(words[0]);
-			userDTO.setLastName(words[1]);
-		}
-
 		if (user == null) {
+			UserRegistrationDTO userDTO = new UserRegistrationDTO();
+			userDTO.setFirstName(oauth2User.getFirstName());
+			userDTO.setLastName(oauth2User.getLastName());
+			userDTO.setEmail(oauth2User.getName());
+
 			userService.createNewUserAfterOAuthLoginSuccess(userDTO);
 		} else {
 			user.setFirstName(oauth2User.getFirstName());
 			user.setLastName(oauth2User.getLastName());
+			UserPicture pic = new UserPicture();
+			pic.setFileLocation(oauth2User.getPicture());
+			pic.setFileName("name" + Math.random());
+			user.setPicture(pic);
 			userService.saveUser(user);
 		}
 

@@ -30,8 +30,25 @@
 	<th:block th:include="fragments/navBar.html :: navBar"></th:block>
 	<div class="container mt-7">
 		<h2 class="mb-5">Users</h2>
-		<div class="row">
 
+<form th:action="@{/books_list/1/search}">
+		<div class="input-group mb-3">
+			<input type="text" name="autor" th:value="${autor}"  class="form-control"
+				placeholder="Recipient's username" aria-label="Recipient's username"
+				aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Search</span>
+			</div>
+		</div>
+		
+		
+		
+
+		</form>
+		
+		
+
+		<div class="row">
 			<div class="col">
 				<div class="card shadow">
 					<div class="table-responsive">
@@ -39,7 +56,9 @@
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">Id</th>
-									<th scope="col"> <a th:href="@{'/users/' + ${currentPage} + '?sortField=lastName'}">Full Name</a></th>
+									<th scope="col"><a
+										th:href="@{'/users/' + ${currentPage} + '?sortField=lastName'}">Full
+											Name</a></th>
 
 									<th scope="col">Email</th>
 									<th scope="col">Role</th>
@@ -75,11 +94,14 @@
 							<ul class="pagination justify-content-end mb-0">
 
 
-							
-								<span th:each="i: ${#numbers.sequence(1, totalPages)}"> <li class="page-item"><a class="page-link" 
-									th:if="${currentPage != i}" th:href="@{'/users/' + ${i}} +'?sortField=' + ${sortField}">[[${i}]]</a></li>
-									<li class="page-item active"><span class="page-link" th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
-								</li></span>
+
+								<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+									<li class="page-item"><a class="page-link"
+										th:if="${currentPage != i}"
+										th:href="@{'/users/' + ${i}} +'?sortField=' + ${sortField}">[[${i}]]</a></li>
+									<li class="page-item active"><span class="page-link"
+										th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;</li>
+								</span>
 
 
 
