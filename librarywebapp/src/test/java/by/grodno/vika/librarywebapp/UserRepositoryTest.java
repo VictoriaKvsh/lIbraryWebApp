@@ -39,28 +39,4 @@ public class UserRepositoryTest {
 		assertTrue(user.getId() > 0);
 		
 	}
-	@Test
-		public void testCreate_readByUserName() {
-		// WHEN
-		User findByEmail = repo.findByEmail(EMAIL);
-
-		// THEN
-		assertNotNull(findByEmail);
-		assertEquals("fName", findByEmail.getFirstName());
-	}
-	
-
-	
-
-//
-//	@Test
-//	public void testCreate_readByUserName() {
-//		// WHEN
-//		User findByEmail = repo.findByEmail(EMAIL);
-//
-//		// THEN
-//		assertNotNull(findByEmail);
-//		assertEquals("fName", findByEmail.getFirstName());
-//	}
-
 }
