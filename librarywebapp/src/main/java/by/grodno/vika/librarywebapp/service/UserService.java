@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.multipart.MultipartFile;
 
 import by.grodno.vika.librarywebapp.domain.User;
+import by.grodno.vika.librarywebapp.domain.UserPicture;
 import by.grodno.vika.librarywebapp.dto.UserDTO;
 import by.grodno.vika.librarywebapp.dto.UserRegistrationDTO;
 
@@ -36,7 +37,7 @@ public interface UserService {
 
 	void updatePassword(User user, String newPassword);
 
-	void createNewUserAfterOAuthLoginSuccess(UserRegistrationDTO userDTO);
+	void createNewUserAfterOAuthLoginSuccess(UserRegistrationDTO userDTO, UserPicture picture);
 
 	
 

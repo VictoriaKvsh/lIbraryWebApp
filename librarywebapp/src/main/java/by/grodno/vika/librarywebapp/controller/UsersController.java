@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import by.grodno.vika.librarywebapp.domain.BookDiscription;
 import by.grodno.vika.librarywebapp.domain.ReadersBook;
 import by.grodno.vika.librarywebapp.domain.User;
 import by.grodno.vika.librarywebapp.dto.Avatar;
@@ -36,27 +37,27 @@ public class UsersController {
 	private UserService userService;
 	@Autowired
 	private StorageService imgService;
-	
 
-	
-	@GetMapping("/users/{pageNum}")
-	public String getAllUsers(Model model,
-			@PathVariable(name = "pageNum") int pageNum,
+	@GetMapping("/users")
+	public String getAllUsers(Model model, @RequestParam(required = false, name = "pageNum") Integer pageNum,
 			@RequestParam(required = false, name = "sortField") String sortField) {
+		if (pageNum == null) {
+			pageNum = 1;
+		}
 		if (sortField == null) {
 			sortField = "lastName";
 		}
-	    Page<User> page = userService.getUsers(pageNum, sortField);
-	     
-	    List<User> users = page.getContent();
-	     
-	    model.addAttribute("currentPage", pageNum);
-	    model.addAttribute("totalPages", page.getTotalPages());
-	    model.addAttribute("sortField", sortField);
-	
-	    model.addAttribute("users", users);
-	     
-	    return "usersList";
+		Page<User> page = userService.getUsers(pageNum, sortField);
+
+		List<User> users = page.getContent();
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("sortField", sortField);
+
+		model.addAttribute("users", users);
+
+		return "usersList";
 	}
 
 	@GetMapping("/users/profile/info")
@@ -64,9 +65,9 @@ public class UsersController {
 			Authentication authentication) {
 		if (userId == null) {
 			userId = userService.findByEmail(authentication.getName()).getId();
-			}
+		}
 		User user = userService.getUser(userId);
-		
+
 		model.addAttribute("user", user);
 		return "profile";
 	}
@@ -90,15 +91,15 @@ public class UsersController {
 
 	public String editUserForm(Authentication authentication, Model model) {
 		User user = userService.getUser(userService.findByEmail(authentication.getName()).getId());
-		
+
 		model.addAttribute("user", user);
 		return "profileEdit";
 	}
 
 	@PostMapping("/users/profile/edit")
-	public String updateUser(@Valid @ModelAttribute("user") UserDTO user, BindingResult bindingResult,  @RequestParam(value = "file", required = false) MultipartFile file,
-			 Model model, Authentication authentication)
-			throws IOException {
+	public String updateUser(@Valid @ModelAttribute("user") UserDTO user, BindingResult bindingResult,
+			@RequestParam(value = "file", required = false) MultipartFile file, Model model,
+			Authentication authentication) throws IOException {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("user", user);
 			return "profileEdit";
@@ -116,9 +117,13 @@ public class UsersController {
 		return "redirect:/userList";
 	}
 
-	@GetMapping("/users/findByName/{lname}")
-	public List<User> getUserByLName(@PathVariable("lname") String lname) {
-		return userService.findByLName(lname);
+	@GetMapping("/users/search")
+	public String getUserByLName(Model model, @Param("lname") String lname) {
+		List<User> users = userService.findByLName(lname);
+		model.addAttribute("currentPage", 1);
+		model.addAttribute("totalPages", 1);
+		model.addAttribute("users", users);
+		return "usersList";
 	}
 
 	@GetMapping("/users/{id}/img")
@@ -131,6 +136,5 @@ public class UsersController {
 			}
 		}
 	}
-
 
 }

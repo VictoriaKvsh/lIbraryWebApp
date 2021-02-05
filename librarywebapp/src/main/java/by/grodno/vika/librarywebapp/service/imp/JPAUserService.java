@@ -67,6 +67,7 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void updateUser(UserDTO userDTO, MultipartFile file) {
 		User findById = userRepo.findById(userDTO.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -126,17 +127,12 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-//	@Transactional
 	public void activateUser(Integer id) {
 		Optional<User> findById = userRepo.findById(id);
 
 		findById.map(user -> {
-			// UserCredentials cred = user.getCredentials();
-			// cred.setActive(true);
 			user.getCredentials().setActive(true);
 			user.setUserRequestToken(null);
-			// credRepo.save(cred);
-
 			userRepo.save(user);
 			return user;
 		}).orElseThrow(() -> new ResourceNotFoundException(
@@ -161,7 +157,6 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-//	@Transactional
 	public void updatePassword(User user, String newPassword) {
 		user.getCredentials().setPassword(passwordEncoder.encode(newPassword));
 		user.setUserRequestToken(null);
@@ -170,16 +165,18 @@ public class JPAUserService implements UserService {
 	}
 
 	@Override
-	public void createNewUserAfterOAuthLoginSuccess(UserRegistrationDTO userDTO) {
+	@Transactional
+	public void createNewUserAfterOAuthLoginSuccess(UserRegistrationDTO userDTO, UserPicture picture) {
 
 		User user = new User();
 		user.setEmail(userDTO.getEmail());
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
 		user.setRole(UserRole.USER);
+		user.setPicture(picture);
 		UserCredentials creds = new UserCredentials(null, new Date(), true, null);
 		user.setCredentials(creds);
-
+		pictureRepo.save(picture);
 		userRepo.save(user);
 	}
 

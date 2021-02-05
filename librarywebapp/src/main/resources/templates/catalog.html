@@ -31,14 +31,17 @@
 	<div class="container mt-7">
 		<h2 class="mb-5">Catalog</h2>
 		
-		<div class="input-group mb-3">
-			<input type="text" class="form-control"
-				placeholder="Recipient's username" aria-label="Recipient's username"
-				aria-describedby="basic-addon2">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">Search</span>
+		<form th:action="@{/catalog/search}">
+			<div class="input-group mb-3">
+				<input type="text" name="keyword" id="keyword" th:value="${keyword}" 
+					class="form-control" placeholder="Recipient's username"
+					aria-label="Recipient's username" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+					<input type="submit" class="input-group-text" id="basic-addon2"
+						value="Search" />
+				</div>
 			</div>
-		</div>
+		</form>
 		
 		<div class="row">
 

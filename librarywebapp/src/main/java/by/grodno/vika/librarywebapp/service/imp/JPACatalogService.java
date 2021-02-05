@@ -2,6 +2,8 @@ package by.grodno.vika.librarywebapp.service.imp;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import by.grodno.vika.librarywebapp.domain.BookDiscription;
 import by.grodno.vika.librarywebapp.domain.Catalog;
 import by.grodno.vika.librarywebapp.domain.Status;
 import by.grodno.vika.librarywebapp.exception.ResourceNotFoundException;
@@ -83,5 +86,13 @@ public class JPACatalogService implements CatalogService {
 		Date modifiedDate = cal.getTime();
 		return modifiedDate;
 	}
+	
+	@Override
+	public List<Catalog> findAllBooks(String keyword) {
+	        if (keyword != null) {
+	            return catalogRepo.search(keyword);
+	        }
+	        return catalogRepo.findAll();
+	    }
 
 }

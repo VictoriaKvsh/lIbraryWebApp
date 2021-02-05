@@ -66,5 +66,13 @@ public class JPABookDiscriptionService implements BookDiscriptionService {
 				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
 		return repo.findAll(exp);
 	}
+	
+	@Override
+	public List<BookDiscription> findAllBooks(String keyword) {
+	        if (keyword != null) {
+	            return repo.search(keyword);
+	        }
+	        return repo.findAll();
+	    }
 
 }

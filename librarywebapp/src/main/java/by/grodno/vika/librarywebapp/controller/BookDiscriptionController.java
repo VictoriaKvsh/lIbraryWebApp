@@ -37,14 +37,16 @@ public class BookDiscriptionController {
 		return "redirect:/books";
 	}
 
-	@GetMapping("/books_list/{pageNum}")
-	public String getAllBooks(Model model, @PathVariable(name = "pageNum") int pageNum,
+	@GetMapping("/books_list")
+	public String getAllBooks(Model model, @RequestParam(required = false, name = "pageNum") Integer pageNum,
 			@RequestParam(required = false, name = "sortField") String sortField) {
-		
+		if (pageNum == null) {
+			pageNum = 1;
+		}
 		Page<BookDiscription> page = bookService.getBooks(pageNum, sortField);
 
 		List<BookDiscription> books = page.getContent();
-		
+
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("sortField", sortField);
@@ -72,16 +74,14 @@ public class BookDiscriptionController {
 		return "redirect:/books_list";
 	}
 
-	@GetMapping("/books_list/1/search")
-	public String findByExample(Model model, @Param(value = "autor") String autor) {
-		
-		BookDiscription bookDiscription = new BookDiscription(null, autor, null, null, null);
-		
-		List<BookDiscription> books = bookService.findByExample(bookDiscription);
+	@GetMapping("/books_list/search")
+	public String findByExample(Model model, @Param(value = "keyword") String keyword) {
 
+		List<BookDiscription> books = bookService.findAllBooks(keyword);
 		model.addAttribute("currentPage", 1);
 		model.addAttribute("totalPages", 1);
 		model.addAttribute("books", books);
+		model.addAttribute("keyword", keyword);
 
 		return "booksCatalogDiscr";
 	}

@@ -1,5 +1,7 @@
 package by.grodno.vika.librarywebapp.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import by.grodno.vika.librarywebapp.domain.Catalog;
@@ -14,6 +16,8 @@ public interface CatalogService {
 	void updateCatalogStatus(Status status, Integer catalogId);
 
 	void deleteCatalog(Integer number);
+
+	List<Catalog> findAllBooks(String keyword);
 
 	
 

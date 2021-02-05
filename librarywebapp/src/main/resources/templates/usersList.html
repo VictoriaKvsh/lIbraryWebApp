@@ -31,22 +31,19 @@
 	<div class="container mt-7">
 		<h2 class="mb-5">Users</h2>
 
-<form th:action="@{/books_list/1/search}">
-		<div class="input-group mb-3">
-			<input type="text" name="autor" th:value="${autor}"  class="form-control"
-				placeholder="Recipient's username" aria-label="Recipient's username"
-				aria-describedby="basic-addon2">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">Search</span>
+		<form th:action="@{/users/search}">
+			<div class="input-group mb-3">
+				<input type="text" name="lname" th:value="${lname}"
+					class="form-control" placeholder="User's lastname"
+					aria-label="User's lastname" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+					<input type="submit" class="input-group-text" id="basic-addon2"
+						value="Search" />
+				</div>
 			</div>
-		</div>
-		
-		
-		
-
 		</form>
-		
-		
+
+
 
 		<div class="row">
 			<div class="col">

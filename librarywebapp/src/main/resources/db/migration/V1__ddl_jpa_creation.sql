@@ -93,3 +93,4 @@ create sequence hibernate_sequence start 1 increment 1;
        add constraint FKbhkea3rh5bk0k6qo3s0ni5dey 
        foreign key (user_id) 
        references user_table;
+       

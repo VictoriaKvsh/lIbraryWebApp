@@ -1,4 +1,4 @@
-package by.grodno.vika.librarywebapp.service;
+package by.grodno.vika.librarywebapp;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class ThymeleafSptingBootApplicationTests {
 	EmailSenderService senderService;
 
 	@Test
-	void contextLoads() throws  MessagingException, IOException {
+	void contextLoads() throws MessagingException, IOException {
 		log.info("sending sample email");
 
 		Map<String, Object> properties = new HashMap<String, Object>();
@@ -29,12 +29,9 @@ class ThymeleafSptingBootApplicationTests {
 		properties.put("location", "Sri Lanka");
 		properties.put("sign", "Java Developer");
 
-		Mail mail = Mail.builder()
-				.from("testfrom@gmail.com")
-				.to("wnsfernando95@gmail.com")
-				.htmlTemplate(new Mail.HtmlTemplate("sample", properties))
-				.subject("This is sample email with spring boot and thymeleaf")
-				.build();
+		Mail mail = Mail.builder().from("testfrom@gmail.com").to("wnsfernando95@gmail.com")
+				.htmlTemplate(new Mail.HtmlTemplate("email", properties))
+				.subject("This is sample email with spring boot and thymeleaf").build();
 
 		senderService.sendEmail(mail);
 	}
