@@ -29,7 +29,15 @@ insert into book_discription_table (autor, title, year, id) values ('William Fau
 insert into book_discription_table (autor, title, year, id) values ('Toni Morrison', 'Beloved', '1987', 21);
 insert into book_discription_table (autor, title, year, id) values ('Markus Zusak', 'The Book Thief ', '1987', 22);
 insert into book_discription_table (autor, title, year, id) values ('Aldous Huxley', 'Brave New World', '1987', 23);
-
+insert into catalog_table (status, book_discription_id, id) values ('3', '10', 25);
+insert into catalog_table (status, book_discription_id, id) values ('3', '11', 26);
+insert into catalog_table (status, book_discription_id, id) values ('3', '12', 27);
+insert into catalog_table (status, book_discription_id, id) values ('3', '13', 28);
+insert into catalog_table (status, book_discription_id, id) values ('3', '14', 29);
+insert into catalog_table (status, book_discription_id, id) values ('3', '15', 30);
+insert into catalog_table (status, book_discription_id, id) values ('3', '16', 31);
+insert into catalog_table (status, book_discription_id, id) values ('3', '17', 32);
+insert into catalog_table (status, book_discription_id, id) values ('3', '18', 33);
 
 ALTER SEQUENCE hibernate_sequence RESTART WITH 100; 
 
